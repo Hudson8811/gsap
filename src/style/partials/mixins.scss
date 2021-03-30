@@ -1,0 +1,20 @@
+@mixin m600 {
+	@media (max-width: 600px) { @content; }
+}
+
+
+
+
+
+@function vw($px) {
+	@return (($px/360) * 100)+vw;
+}
+
+
+@function vw2($px) {
+	@return (($px/550) * 100)+vw;
+}
+
+@function vw3($px) {
+	@return (($px/660) * 100)+vw;
+}

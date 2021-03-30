@@ -1,0 +1,74 @@
+extends layouts/default
+block favicon
+	link(rel='shortcut icon' href='img/favicon_1.ico' type='image/x-icon')
+block vars
+	-
+		const page = {
+			title: 'Gsap'
+		};
+
+
+
+
+block main
+	canvas#noise.noise
+
+	.header
+		.header__left
+			.header__letter P
+			.header__socials
+				a(href="" target="_blank")
+					svg
+						use(xlink:href="./svg/sprite.svg#fb")
+				a(href="" target="_blank")
+					svg
+						use(xlink:href="./svg/sprite.svg#tw")
+				a(href="" target="_blank")
+					svg
+						use(xlink:href="./svg/sprite.svg#in")
+		.header__right
+			ul.header__menu
+				li
+					a(href="") HOME
+				li
+					a(href="") Projects
+				li
+					a(href="") awwards
+				li
+					a(href="") testimonials
+				li
+					a(href="") blog
+				li
+					a(href="") CONTACT
+
+			.header__phone
+				a(href="tel:+23155908368") +2(315) 590 83 68
+
+
+	.scroll
+		.home-page
+			.page-title.show
+				ul
+					li
+						.title my name is robert
+						.number 1.0
+					li
+						.title Portfolio
+						.number 2.0
+
+			.scrollable
+				section
+					.sticky-title
+						ul
+							li
+								div my name is robert
+								div 1.0
+					.content(style="opacity: 0.1;     background: green;")
+			.scrollable
+				section
+					.sticky-title
+						ul
+							li
+								div Portfolio
+								div 2.0
+					.content(style="opacity: 0.1;     background: red;")
