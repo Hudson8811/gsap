@@ -25,6 +25,7 @@ body{
 	color: $main-color;
 
 	background: #1C1C1C;
+
 }
 input, button {
 	-webkit-appearance: none;
@@ -74,4 +75,7 @@ img {
 	height: 100vh;
 	pointer-events: none;
 	opacity: 1;
+
+	background: #1C1C1C url("../images/noise.png") center center no-repeat;
+	background-size: cover;
 }
