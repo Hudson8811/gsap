@@ -16,7 +16,7 @@ $(function() {
             const buffer32 = new Uint32Array(idata.data.buffer);
             const len = buffer32.length;
             for (let i = 0; i < len; i++) {
-                if (Math.random() < 0.15) {
+                if (Math.random() < 0.5) {
                     buffer32[i] = 0xff313131;
                 }
             }
