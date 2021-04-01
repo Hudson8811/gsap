@@ -75,7 +75,7 @@ $(function() {
         })();
     };
 
-    //noise();
+    noise();
 
 
 
