@@ -17,7 +17,7 @@ $(function() {
             const len = buffer32.length;
             for (let i = 0; i < len; i++) {
                 if (Math.random() < 0.5) {
-                    buffer32[i] = 0xff313131;
+                    buffer32[i] = 0xff000000;
                 }
             }
             noiseData.push(idata);

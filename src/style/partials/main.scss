@@ -25,7 +25,7 @@ body{
 	color: $main-color;
 
 	background: #1C1C1C;
-
+	background: linear-gradient(to right, rgba(36,31,31,1) 0%, rgba(36,31,31,1) 32%, rgba(74,71,70,1) 100%);
 }
 input, button {
 	-webkit-appearance: none;
@@ -74,8 +74,8 @@ img {
 	width: 100vw;
 	height: 100vh;
 	pointer-events: none;
-	opacity: 1;
-
+	//opacity: 1;
+	opacity: .15;
 	/*background: #1C1C1C url("../images/noise.png") center center no-repeat;
 	background-size: cover;*/
 }
