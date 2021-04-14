@@ -95,9 +95,30 @@ block main
 									svg
 										use(xlink:href="./svg/sprite.svg#arrow")
 
+
+							.home__numbers
+								.home__number
+									.home__number-digital(data-number="8") 0
+									.home__number-text.small Years <br>experience
+								.home__number
+									.home__number-digital(data-number="5") 0
+									.home__number-text.small Themeforest <br>awwards
+								.home__number
+									.home__number-digital(data-number="60") 0
+									.home__number-text.small Projects <br>Done
+
 						.content__right
+							.home__circles
+								.home__circles-lines
+								.home__circle.home__circle--left
+									img.home__circle-img(src="img/image-1.jpg" alt="")
+								.home__circle.home__circle--right
+									.home__circle-text
+										a.js-brief-link(href="javascript:;") Fill out the <br>brief to find out <br>the cost
+
+
 			.scrollable
-				section
+				section.projects
 					.sticky-title
 						ul
 							li
@@ -108,6 +129,22 @@ block main
 							.content__title
 								.h1 projects
 
+							ul.content__menu.projects__menu
+								li.active
+									a(href="") BERLING agency website
+								li
+									a(href="") Prettylittlething american shop
+								li
+									a(href="") Benhome - Architecture theme
+								li
+									a(href="") Gilhouse - architecture website
+								li
+									a(href="") gilber - personal website
+								li
+									a(href="") jonny - personal website
+
+
+
 							.content__btn-block
 								.content__btn-label.small View all works
 								a.content__btn-btn.btn.btn--arrow(href="#")
@@ -116,8 +153,22 @@ block main
 
 
 						.content__right
+							.projects__blocks
+								.projects__block.active
+									img(src="img/image-22.jpg" alt="")
+								.projects__block
+									img(src="img/image-2.jpg" alt="")
+								.projects__block
+									img(src="img/image-22.jpg" alt="")
+								.projects__block
+									img(src="img/image-2.jpg" alt="")
+								.projects__block
+									img(src="img/image-22.jpg" alt="")
+								.projects__block
+									img(src="img/image-2.jpg" alt="")
+
 			.scrollable
-				section
+				section.awards
 					.sticky-title
 						ul
 							li
@@ -141,8 +192,35 @@ block main
 
 
 						.content__right
+							.content__subtitle Professional <span>awards</span>
+							.content__awards.awards__list
+								.content__award
+									.content__award-img
+										img(src="img/award-1.png" alt="")
+									.content__award-title
+										p 1ST WINNER CREATIVE DESIGN CHAMPIONSHIP
+									.content__award-text.small For most favorited design voted by NY City Style customers
+								.content__award
+									.content__award-img
+										img(src="img/award-2.png" alt="")
+									.content__award-title
+										p BEST 5 BRANDING PROJECT OF NOMINATIONS
+									.content__award-text.small For best creative & usable health care mobile app design
+								.content__award
+									.content__award-img
+										img(src="img/award-3.png" alt="")
+									.content__award-title
+										p 8 Years of Membership
+									.content__award-text.small Has been part of the Envato Community for over 8 years
+								.content__award
+									.content__award-img
+										img(src="img/award-4.png" alt="")
+									.content__award-title
+										p Exclusive Author
+									.content__award-text.small Sells items exclusively on Envato Market
+
 			.scrollable
-				section
+				section.testimonials
 					.sticky-title
 						ul
 							li
@@ -156,8 +234,9 @@ block main
 								.h1 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; happy
 								.h1 &nbsp; clients
 						.content__right
+							.content__subtitle <span>Creative</span> & dedicated is things that my studio brings for your business
 			.scrollable
-				section
+				section.experience
 					.sticky-title
 						ul
 							li
@@ -177,8 +256,44 @@ block main
 								a.content__btn-btn.btn(href="#") resume
 
 						.content__right
+							.content__awards.awards__list
+								.content__award
+									.content__award-img
+										img(src="img/soc-fb.svg" alt="")
+									.content__award-title
+										span.small 2019-2021
+										p facebook
+									.content__award-text.small Assertively exploit wireless initiatives rather than synergistic core competencies.
+								.content__award
+									.content__award-img
+										img(src="img/soc-be.svg" alt="")
+									.content__award-title
+										span.small 2017-2019
+										p behance
+									.content__award-text.small im working via developer 9 years and i know all about design
+								.content__award
+									.content__award-img
+										img(src="img/soc-tw.svg" alt="")
+									.content__award-title
+										span.small 2014-2017
+										p twitter
+									.content__award-text.small Credibly streamline mission-critical value with multifunctional functionalities. Leading team designers.
+								.content__award
+									.content__award-img
+										img(src="img/soc-inst.svg" alt="")
+									.content__award-title
+										span.small 2012-2014
+										p instagramm
+									.content__award-text.small Proven ability to lead and manage a wide variety of design and development projects in team and independent situations.
+								.content__award
+									.content__award-img
+										img(src="img/soc-in.svg" alt="")
+									.content__award-title
+										span.small 206-2012
+										p linkedin
+									.content__award-text.small Assertively exploit wireless initiatives rather than synergistic core competencies.
 			.scrollable
-				section
+				section.news
 					.sticky-title
 						ul
 							li
@@ -191,6 +306,18 @@ block main
 								.small I love my work and every project is my pride
 								.h1 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; news
 
+							ul.content__menu.news__menu
+								li.active
+									a(href="") How to design well?
+								li
+									a(href="") Lemon Illustration design
+								li
+									a(href="") Paul theme Branding
+								li
+									a(href="") Best typography 2020
+								li
+									a(href="") my name is pattison
+
 							.content__btn-block
 								.content__btn-label.small View all works
 								a.content__btn-btn.btn.btn--arrow(href="#")
@@ -198,8 +325,41 @@ block main
 										use(xlink:href="./svg/sprite.svg#arrow")
 
 						.content__right
+							.news__blocks
+								.news__block.active
+									.news__block-info
+										.news__block-date 3th January, 2020
+										.news__block-text Berling ® —  minimalism photography agency website. with the help of a  minimalistic design, the site turned out to be very  user-friendly  and responsive, and the brand became more.
+									.news__block-image
+										img(src="img/news.jpg" alt="")
+								.news__block
+									.news__block-info
+										.news__block-date 3th January, 2020
+										.news__block-text Berling ® —  minimalism photography agency website. with the help of a  minimalistic design, the site turned out to be very  user-friendly  and responsive, and the brand became more.
+									.news__block-image
+										img(src="img/news.jpg" alt="")
+								.news__block
+									.news__block-info
+										.news__block-date 3th January, 2020
+										.news__block-text Berling ® —  minimalism photography agency website. with the help of a  minimalistic design, the site turned out to be very  user-friendly  and responsive, and the brand became more.
+									.news__block-image
+										img(src="img/news.jpg" alt="")
+								.news__block
+									.news__block-info
+										.news__block-date 3th January, 2020
+										.news__block-text Berling ® —  minimalism photography agency website. with the help of a  minimalistic design, the site turned out to be very  user-friendly  and responsive, and the brand became more.
+									.news__block-image
+										img(src="img/news.jpg" alt="")
+								.news__block
+									.news__block-info
+										.news__block-date 3th January, 2020
+										.news__block-text Berling ® —  minimalism photography agency website. with the help of a  minimalistic design, the site turned out to be very  user-friendly  and responsive, and the brand became more.
+									.news__block-image
+										img(src="img/news.jpg" alt="")
+
+
 			.scrollable
-				section
+				section.contacts
 					.sticky-title
 						ul
 							li
@@ -211,4 +371,37 @@ block main
 								.h1 Hire &nbsp;&nbsp;&nbsp;&nbsp; me
 								.small Enjoy coffe with me
 
+							ul.content__menu.contacts__menu
+								li.active
+									span mail: 000.lunchbox@gmail.com
+								li.active
+									span skype: murren8
+								li.active
+									a(href="") www.behance.net/Paulggooo
+								li.active
+									span telegram: Paul_inc
+
+							.contacts__copyright.small © Pattison 2021.  All Rights Resevered
+
 						.content__right
+							.content__subtitle Let's grab a coffee and jump on <span>conversation</span> chat with me.
+							.content__contacts.contacts__form
+								.content__brief
+									.content__brief-title
+										a(href="") send a brief
+									.content__brief-text.span I recommend filling out a brief to assess the cost of the project. <a href="">Brief</a>
+
+								.content__form
+									label.content__form-input
+										input(type="text" name="name")
+										span.content__form-placeholder name
+									label.content__form-input
+										input(type="email" name="emal")
+										span.content__form-placeholder EMAIL *
+									label.content__form-input
+										input(type="text" name="msg")
+										span.content__form-placeholder MESSAGE *
+									.content__form-btn
+										button.btn.btn--arrow(type="submit")
+											svg
+												use(xlink:href="./svg/sprite.svg#arrow")
