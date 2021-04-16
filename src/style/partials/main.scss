@@ -78,4 +78,10 @@ img {
 	opacity: .15;
 	/*background: #1C1C1C url("../images/noise.png") center center no-repeat;
 	background-size: cover;*/
+
+	&--inner{
+		width: 100%;
+		height: 100%;
+		position: absolute;
+	}
 }

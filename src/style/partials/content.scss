@@ -123,6 +123,7 @@
     transform-origin: 0 100%;
     transform: rotate(-90deg) translateY(100%) translateX(vw(89));
     white-space: nowrap;
+    z-index: 1;
     li{
       position: absolute;
       padding: 0 vw(128) 0 vw(35);
@@ -140,10 +141,7 @@
 
 .page-title{
   background: #1C1C1C;
-}
-
-.page-title{
-  background: #1C1C1C;
+  background: rgba(36,31,31,1);
   ul{
     li:not(:first-child){
       transform: translateY(-100%);
@@ -232,6 +230,28 @@
     padding-left: vw(82);
     box-sizing: border-box;
     display: flex;
+    position: relative;
+    &__bg{
+      position: absolute;
+      z-index: -2;
+      width: calc(100% - 7.80952vh);
+      height: 100%;
+      background-size: cover;
+      right: 0;
+      top: 0;
+      pointer-events: none;
+      &::before{
+        content: "";
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        left: 0;
+        top: 0;
+        z-index: 1;
+        background: linear-gradient(0deg, rgba(0, 0, 0, 0.31), rgba(0, 0, 0, 0.31));
+        display: block;
+      }
+    }
     &__left{
       width: calc(709px - 7.80952vh);
       border-right: 1px solid rgba(230, 227, 217, 0.3);
@@ -385,6 +405,7 @@
         p{
           font-size: 22px;
           line-height: 130%;
+          text-transform: uppercase;
         }
         span{
           opacity: 0.5;
@@ -597,6 +618,32 @@
 
 .awards{
 
+}
+
+
+.testimonials{
+  &__clients{
+    margin-top: auto;
+    display: flex;
+    align-items: center;
+    position: relative;
+    flex-wrap: wrap;
+  }
+  &__client{
+    width: 50%;
+    box-sizing: border-box;
+    height: 120px;
+    display: flex;
+    align-items: center;
+    margin: 5px 0;
+    padding: 0 5px;
+    position: relative;
+    img{
+      display: block;
+      max-width: 100%;
+      max-height: 100%;
+    }
+  }
 }
 
 
