@@ -134,10 +134,10 @@ $(function() {
 
 $(function (){
     $(window).on('load',function (){
+        $('#preloader').fadeOut(2000);
+
         gsap.registerPlugin(ScrollTrigger);
         gsap.registerPlugin(ScrollToPlugin);
-
-
 
         let titles = gsap.utils.toArray(".page-title li"),
             sections = gsap.utils.toArray(".scrollable"),
@@ -692,8 +692,6 @@ $(function (){
             $("html, body").animate({ scrollTop: parseInt(linkData[link]) }, (Math.abs(currentScroll-parseInt(linkData[link])))/2.5);
         });
     });
-
-
 });
 
 $(function (){
