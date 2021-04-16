@@ -27,18 +27,20 @@ block main
 						use(xlink:href="./svg/sprite.svg#in")
 		.header__right
 			ul.header__menu
+				li.active
+					a(href="javascript:;") HOME
 				li
-					a(href="#") HOME
+					a(href="javascript:;") Projects
 				li
-					a(href="#") Projects
+					a(href="javascript:;") awwards
 				li
-					a(href="#") awwards
+					a(href="javascript:;") testimonials
 				li
-					a(href="#") testimonials
+					a(href="javascript:;") experience
 				li
-					a(href="#") blog
+					a(href="javascript:;") blog
 				li
-					a(href="#") CONTACT
+					a(href="javascript:;") CONTACT
 
 			.header__phone
 				a(href="tel:+23155908368") +2(315) 590 83 68
@@ -74,7 +76,7 @@ block main
 				section.home
 					.sticky-title
 						ul
-							li
+							li(style="display:none")
 								div my name is robert
 								div 1.0
 					.content
@@ -131,17 +133,17 @@ block main
 
 							ul.content__menu.projects__menu
 								li.active
-									a(href="") BERLING agency website
+									a(href="javascript:;") BERLING agency website
 								li
-									a(href="") Prettylittlething american shop
+									a(href="javascript:;") Prettylittlething american shop
 								li
-									a(href="") Benhome - Architecture theme
+									a(href="javascript:;") Benhome - Architecture theme
 								li
-									a(href="") Gilhouse - architecture website
+									a(href="javascript:;") Gilhouse - architecture website
 								li
-									a(href="") gilber - personal website
+									a(href="javascript:;") gilber - personal website
 								li
-									a(href="") jonny - personal website
+									a(href="javascript:;") jonny - personal website
 
 
 
@@ -156,15 +158,15 @@ block main
 							.projects__blocks
 								.projects__block.active
 									img(src="img/image-22.jpg" alt="")
-								.projects__block
+								.projects__block.active
 									img(src="img/image-2.jpg" alt="")
-								.projects__block
+								.projects__block.active
 									img(src="img/image-22.jpg" alt="")
-								.projects__block
+								.projects__block.active
 									img(src="img/image-2.jpg" alt="")
-								.projects__block
+								.projects__block.active
 									img(src="img/image-22.jpg" alt="")
-								.projects__block
+								.projects__block.active
 									img(src="img/image-2.jpg" alt="")
 
 			.scrollable
@@ -256,7 +258,7 @@ block main
 								a.content__btn-btn.btn(href="#") resume
 
 						.content__right
-							.content__awards.awards__list
+							.content__awards.experience__list
 								.content__award
 									.content__award-img
 										img(src="img/soc-fb.svg" alt="")
@@ -328,34 +330,40 @@ block main
 							.news__blocks
 								.news__block.active
 									.news__block-info
-										.news__block-date 3th January, 2020
-										.news__block-text Berling ® —  minimalism photography agency website. with the help of a  minimalistic design, the site turned out to be very  user-friendly  and responsive, and the brand became more.
+										.news__block-date.small 3th January, 2020
+										.news__block-text.small Berling ® —  minimalism photography agency website. with the help of a  minimalistic design, the site turned out to be very  user-friendly  and responsive, and the brand became more.
+										.news__block-number (01)
 									.news__block-image
 										img(src="img/news.jpg" alt="")
 								.news__block
 									.news__block-info
-										.news__block-date 3th January, 2020
-										.news__block-text Berling ® —  minimalism photography agency website. with the help of a  minimalistic design, the site turned out to be very  user-friendly  and responsive, and the brand became more.
+										.news__block-date.small 3th January, 2020
+										.news__block-text.small Berling ® —  minimalism photography agency website. with the help of a  minimalistic design, the site turned out to be very  user-friendly  and responsive, and the brand became more.
+										.news__block-number (01)
 									.news__block-image
 										img(src="img/news.jpg" alt="")
 								.news__block
 									.news__block-info
-										.news__block-date 3th January, 2020
-										.news__block-text Berling ® —  minimalism photography agency website. with the help of a  minimalistic design, the site turned out to be very  user-friendly  and responsive, and the brand became more.
+										.news__block-date.small 3th January, 2020
+										.news__block-text.small Berling ® —  minimalism photography agency website. with the help of a  minimalistic design, the site turned out to be very  user-friendly  and responsive, and the brand became more.
+										.news__block-number (01)
 									.news__block-image
 										img(src="img/news.jpg" alt="")
 								.news__block
 									.news__block-info
-										.news__block-date 3th January, 2020
-										.news__block-text Berling ® —  minimalism photography agency website. with the help of a  minimalistic design, the site turned out to be very  user-friendly  and responsive, and the brand became more.
+										.news__block-date.small 3th January, 2020
+										.news__block-text.small Berling ® —  minimalism photography agency website. with the help of a  minimalistic design, the site turned out to be very  user-friendly  and responsive, and the brand became more.
+										.news__block-number (01)
 									.news__block-image
 										img(src="img/news.jpg" alt="")
 								.news__block
 									.news__block-info
-										.news__block-date 3th January, 2020
-										.news__block-text Berling ® —  minimalism photography agency website. with the help of a  minimalistic design, the site turned out to be very  user-friendly  and responsive, and the brand became more.
+										.news__block-date.small 3th January, 2020
+										.news__block-text.small Berling ® —  minimalism photography agency website. with the help of a  minimalistic design, the site turned out to be very  user-friendly  and responsive, and the brand became more.
+										.news__block-number (01)
 									.news__block-image
 										img(src="img/news.jpg" alt="")
+
 
 
 			.scrollable

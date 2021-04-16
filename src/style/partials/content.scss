@@ -70,6 +70,11 @@
         line-height: 140%;
         display: block;
       }
+      &.active{
+        a{
+          color: $orange-color;
+        }
+      }
     }
   }
   &__phone{
@@ -298,12 +303,14 @@
           padding: 9px 52px 9px 22px;
           display: block;
           width: 100%;
+          position: relative;
         }
         > a {
           color: inherit;
           padding: 9px 52px 9px 22px;
           display: block;
           width: 100%;
+          position: relative;
         }
         &:hover{
           opacity: 0.8;
@@ -333,6 +340,7 @@
       font-size: 40px;
       line-height: 120%;
       max-width: 514px;
+      position: relative;
       span{
         color: $orange-color;
       }
@@ -341,12 +349,18 @@
     &__awards{
       margin-left: -22px;
       margin-right: -22px;
+      height: -webkit-fill-available;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
     }
     &__award{
       min-height: 170px;
       display: flex;
       align-items: center;
       padding: 22px 74px;
+      overflow: hidden;
+      position: relative;
       +.content__award{
         border-top: 1px solid rgba(226, 220, 200, 0.3);
       }
@@ -356,6 +370,8 @@
         display: flex;
         align-items: center;
         flex-basis: 85px;
+        flex-shrink: 0;
+        margin-right: 73px;
         img{
           max-width: 100%;
           max-height: 100%;
@@ -364,6 +380,8 @@
         }
       }
       &-title{
+        width: 310px;
+        margin-right: 58px;
         p{
           font-size: 22px;
           line-height: 130%;
@@ -371,6 +389,9 @@
         span{
           opacity: 0.5;
         }
+      }
+      &-text{
+        width: 390px;
       }
     }
 
@@ -382,6 +403,7 @@
     &__brief{
       width: 321px;
       margin-right: 193px;
+      position: relative;
       &-title{
         font-size: 18px;
         line-height: 35px;
@@ -399,6 +421,7 @@
 
     &__form{
       width: 495px;
+      position: relative;
       &-placeholder{
         height: 100%;
         width: 100%;
@@ -553,11 +576,15 @@
   &__menu{}
   &__blocks{
     height: 100%;
+    overflow: hidden;
   }
   &__block{
-    height: 100%;
-    overflow: auto;
+    height: auto;
+    overflow: visible;
     display: none;
+    +.projects__block{
+      padding-top: 22px;
+    }
     img{
       width: 100%;
       display: block;
@@ -574,12 +601,54 @@
 
 
 
+.news{
+  &__menu{}
+  &__blocks{
+    height: 100%;
+    overflow: hidden;
+    padding-right: 30px;
+  }
+  &__block{
+    height: auto;
+    overflow: visible;
+    display: none;
+    +.projects__block{
+      padding-top: 22px;
+    }
+    img{
+      width: 100%;
+      display: block;
+    }
+    &-info{
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 55px;
+    }
+    &-date{
+      width: 380px;
+      opacity: 0.6;
+    }
+    &-text{
+      width: 390px;
+    }
+    &-number{
+      font-weight: 500;
+      font-size: 40px;
+      line-height: 1;
+    }
 
+
+    &.active{
+      display: block;
+    }
+  }
+}
 
 
 .contacts{
   &__copyright{
     margin-top: auto;
+    position: relative;
   }
   &__form{
     margin-top: 80px;
