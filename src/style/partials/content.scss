@@ -240,6 +240,7 @@
       right: 0;
       top: 0;
       pointer-events: none;
+      opacity: 0.5;
       &::before{
         content: "";
         width: 100%;
@@ -659,7 +660,7 @@
     height: auto;
     overflow: visible;
     display: none;
-    +.projects__block{
+    +.news__block {
       padding-top: 22px;
     }
     img{

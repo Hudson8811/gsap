@@ -99,6 +99,8 @@ $(function (){
         gsap.registerPlugin(ScrollTrigger);
         gsap.registerPlugin(ScrollToPlugin);
 
+
+
         let titles = gsap.utils.toArray(".page-title li"),
             sections = gsap.utils.toArray(".scrollable"),
             projectBlocks = gsap.utils.toArray(".projects__blocks .projects__block"),
@@ -632,6 +634,23 @@ $(function (){
             xPercent: -100 * (sections.length-1),
             ease: "none"
         },0);
+
+
+
+        let linkData = {
+            '0': 0,
+            '1': scrollDurationHome,
+            '2': scrollDurationHome*2+projectBlocksScroll,
+            '3': scrollDurationHome*3+projectBlocksScroll,
+            '4': scrollDurationHome*4+projectBlocksScroll,
+            '5': scrollDurationHome*5+projectBlocksScroll,
+            '6': scrollDurationHome*6+projectBlocksScroll+newsBlocksScroll,
+        }
+        $(document).on('click','.header__menu a',function (){
+            event.preventDefault();
+            let link = $(this).data('link');
+            $("html, body").animate({ scrollTop: parseInt(linkData[link]) }, 1000);
+        });
     });
 
 
