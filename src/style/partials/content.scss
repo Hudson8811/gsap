@@ -191,6 +191,10 @@
   &--arrow{
     padding: 26px 36px;
   }
+  &--invert{
+    background: transparent;
+    border: 1px solid $main-color;
+  }
 }
 
 .h1{
@@ -496,8 +500,85 @@
         margin-top: 78px;
       }
     }
+
+    &__slider{
+      margin-left: 339px;
+      padding-left: 200px;
+      position: relative;
+      box-sizing: border-box;
+      margin-top: 224px;
+      &::before{
+        content: "";
+        display: block;
+        width: 101px;
+        height: 87px;
+        position: absolute;
+        left: 0;
+        top: 0;
+        pointer-events: none;
+        background: url("../img/q.png") left top no-repeat;
+        background-size: contain;
+      }
+
+      &-name{
+        margin-top: 49px;
+        font-size: 22px;
+        line-height: 1.59;
+        text-transform: uppercase;
+      }
+      &-staff{
+        margin-top: 8px;
+      }
+    }
   }
 }
+
+
+.slides{
+  position: relative;
+  width: 580px;
+  display: flex;
+  flex-direction: column;
+  &__container {
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex: 1;
+    height: 340px;
+  }
+  &__inner {
+    position: relative;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+  }
+
+  &__controls {
+    padding: 10px;
+    display: flex;
+    margin-top: 30px
+  }
+  &__btn{
+    &--prev{
+      transform: scaleX(-1);
+    }
+    &--next{}
+     +.slides__btn{
+      margin-left: 35px;
+    }
+  }
+
+  .slide {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    display: block;
+  }
+
+
+}
+
+
 
 .home{
   &__circles{
@@ -605,7 +686,7 @@
     overflow: visible;
     display: none;
     +.projects__block{
-      padding-top: 22px;
+      padding-top: 50px;
     }
     img{
       width: 100%;
@@ -661,7 +742,7 @@
     overflow: visible;
     display: none;
     +.news__block {
-      padding-top: 22px;
+      padding-top: 100px;
     }
     img{
       width: 100%;
