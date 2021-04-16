@@ -28,19 +28,19 @@ block main
 		.header__right
 			ul.header__menu
 				li.active
-					a(href="javascript:;" data-link="0") HOME
+					a.js-scroll-link(href="javascript:;" data-link="0") HOME
 				li
-					a(href="javascript:;" data-link="1") Projects
+					a.js-scroll-link(href="javascript:;" data-link="1") Projects
 				li
-					a(href="javascript:;" data-link="2") awwards
+					a.js-scroll-link(href="javascript:;" data-link="2") awwards
 				li
-					a(href="javascript:;" data-link="3") testimonials
+					a.js-scroll-link(href="javascript:;" data-link="3") testimonials
 				li
-					a(href="javascript:;" data-link="4") experience
+					a.js-scroll-link(href="javascript:;" data-link="4") experience
 				li
-					a(href="javascript:;" data-link="5") blog
+					a.js-scroll-link(href="javascript:;" data-link="5") blog
 				li
-					a(href="javascript:;" data-link="6") CONTACT
+					a.js-scroll-link(href="javascript:;" data-link="6") CONTACT
 
 			.header__phone
 				a(href="tel:+23155908368") +2(315) 590 83 68
@@ -95,7 +95,7 @@ block main
 
 							.content__btn-block
 								.content__btn-label.small (hire me :)
-								a.content__btn-btn.btn.btn--arrow(href="#")
+								a.content__btn-btn.btn.btn--arrow.js-scroll-link(href="javascript:;" data-link="6")
 									svg
 										use(xlink:href="./svg/sprite.svg#arrow")
 
@@ -411,15 +411,15 @@ block main
 										a(href="") send a brief
 									.content__brief-text.span I recommend filling out a brief to assess the cost of the project. <a href="">Brief</a>
 
-								.content__form
+								form.content__form
 									label.content__form-input
 										input(type="text" name="name")
 										span.content__form-placeholder name
 									label.content__form-input
-										input(type="email" name="emal")
+										input(type="email" name="emal" required="")
 										span.content__form-placeholder EMAIL *
 									label.content__form-input
-										input(type="text" name="msg")
+										input(type="text" name="msg" required="")
 										span.content__form-placeholder MESSAGE *
 									.content__form-btn
 										button.btn.btn--arrow(type="submit")

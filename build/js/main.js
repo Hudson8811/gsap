@@ -684,12 +684,28 @@ $(function (){
             '5': scrollDurationHome*5+projectBlocksScroll,
             '6': scrollDurationHome*6+projectBlocksScroll+newsBlocksScroll,
         }
-        $(document).on('click','.header__menu a',function (){
+        $(document).on('click','.js-scroll-link',function (){
             event.preventDefault();
-            let link = $(this).data('link');
-            $("html, body").animate({ scrollTop: parseInt(linkData[link]) }, 1000);
+            let link = $(this).data('link'),
+                currentScroll = $('html').scrollTop();
+
+            $("html, body").animate({ scrollTop: parseInt(linkData[link]) }, (Math.abs(currentScroll-parseInt(linkData[link])))/2.5);
         });
     });
 
 
+});
+
+
+
+
+$('document').ready(function (){
+    $('.content__form-input input').on('change blur',function (){
+        let value = $(this).val();
+        if (value.length > 0){
+            $(this).addClass('valid');
+        } else {
+            $(this).removeClass('valid');
+        }
+    });
 });

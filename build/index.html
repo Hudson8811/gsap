@@ -29,13 +29,13 @@
         </div>
         <div class="header__right">
           <ul class="header__menu">
-            <li class="active"><a href="javascript:;" data-link="0">HOME</a></li>
-            <li><a href="javascript:;" data-link="1">Projects</a></li>
-            <li><a href="javascript:;" data-link="2">awwards</a></li>
-            <li><a href="javascript:;" data-link="3">testimonials</a></li>
-            <li><a href="javascript:;" data-link="4">experience</a></li>
-            <li><a href="javascript:;" data-link="5">blog</a></li>
-            <li><a href="javascript:;" data-link="6">CONTACT</a></li>
+            <li class="active"><a class="js-scroll-link" href="javascript:;" data-link="0">HOME</a></li>
+            <li><a class="js-scroll-link" href="javascript:;" data-link="1">Projects</a></li>
+            <li><a class="js-scroll-link" href="javascript:;" data-link="2">awwards</a></li>
+            <li><a class="js-scroll-link" href="javascript:;" data-link="3">testimonials</a></li>
+            <li><a class="js-scroll-link" href="javascript:;" data-link="4">experience</a></li>
+            <li><a class="js-scroll-link" href="javascript:;" data-link="5">blog</a></li>
+            <li><a class="js-scroll-link" href="javascript:;" data-link="6">CONTACT</a></li>
           </ul>
           <div class="header__phone"><a href="tel:+23155908368">+2(315) 590 83 68</a></div>
         </div>
@@ -97,7 +97,7 @@
                     <div class="small">Hello, my name is Pattison and i am UX/UI designer and front-end developer, im working via developer 9 years and i know all about design</div>
                   </div>
                   <div class="content__btn-block">
-                    <div class="content__btn-label small">(hire me :)</div><a class="content__btn-btn btn btn--arrow" href="#">
+                    <div class="content__btn-label small">(hire me :)</div><a class="content__btn-btn btn btn--arrow js-scroll-link" href="javascript:;" data-link="6">
                       <svg>
                         <use xlink:href="./svg/sprite.svg#arrow"></use>
                       </svg></a>
@@ -440,15 +440,15 @@
                       <div class="content__brief-title"><a href="">send a brief</a></div>
                       <div class="content__brief-text span">I recommend filling out a brief to assess the cost of the project. <a href="">Brief</a></div>
                     </div>
-                    <div class="content__form">
+                    <form class="content__form">
                       <label class="content__form-input">
                         <input type="text" name="name"><span class="content__form-placeholder">name</span>
                       </label>
                       <label class="content__form-input">
-                        <input type="email" name="emal"><span class="content__form-placeholder">EMAIL *</span>
+                        <input type="email" name="emal" required=""><span class="content__form-placeholder">EMAIL *</span>
                       </label>
                       <label class="content__form-input">
-                        <input type="text" name="msg"><span class="content__form-placeholder">MESSAGE *</span>
+                        <input type="text" name="msg" required=""><span class="content__form-placeholder">MESSAGE *</span>
                       </label>
                       <div class="content__form-btn">
                         <button class="btn btn--arrow" type="submit">
@@ -457,7 +457,7 @@
                           </svg>
                         </button>
                       </div>
-                    </div>
+                    </form>
                   </div>
                 </div>
               </div>
