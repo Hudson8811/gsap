@@ -125,6 +125,8 @@ $(function (){
             //home+projects start
             sectionNumber++;
 
+            gsap.set('.home .sticky-title li',{'opacity':0});
+
             let tlProjectBtn = new TimelineMax({paused: true});
             tlProjectBtn.from(".projects .content__btn-block > *", 0.3, {scale:0, ease:Back.easeOut});
 

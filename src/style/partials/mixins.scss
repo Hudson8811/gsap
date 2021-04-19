@@ -1,5 +1,5 @@
-@mixin m600 {
-	@media (max-width: 600px) { @content; }
+@mixin mobile {
+	@media screen and (max-width: 768px) and (orientation: portrait) { @content; }
 }
 
 
@@ -13,3 +13,6 @@
 	@return (($px/1920) * 100)+vw;
 }
 
+@function vw3($px) {
+	@return (($px/375) * 100)+vw;
+}
