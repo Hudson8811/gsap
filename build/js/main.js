@@ -54,18 +54,15 @@ if($('.main').hasClass('blog_page')){
 			if (!header.hasClass('is-fixed')) {
 				header.css({'top': -headerHeight + 'px', 'transform': 'translateY(' + headerHeight + 'px)'}).addClass('is-fixed');
 
-				if (!isAbsoluteHeader) {
-					body.css('padding-top', headerHeight + 'px');
-				}
+				
 			}
 		} else {
 			isScroll = false;
 			header.removeClass(classes + ' is-fixed').removeAttr('style');
-			if (!isAbsoluteHeader) {
-				body.css('padding-top', 0);
-			}
+			
 		}
 	});
+    
 }
 
 
