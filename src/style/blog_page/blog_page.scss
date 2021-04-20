@@ -23,11 +23,32 @@ $orange-color: #b66449;
 
 .blog_page {
   .header {
+    transition: transform 0.5s linear;
+    position: absolute;
+    left: 0;
+    top: 0;
+
+    &:before {
+      content: '';
+      z-index: -1;
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      left: 0;
+      top: 0;
+      background: linear-gradient(to right, #241f1f 0, #241f1f 32%, #4a4746 100%);
+      transition: opacity 0.5s linear;
+      opacity: 0;
+    }
+
     @include mobile {
       background: transparent;
     }
     &.active {
-      background: linear-gradient(to right, #241f1f 0, #241f1f 32%, #4a4746 100%);
+      position: fixed;
+      &:before {
+        opacity: 1;
+      }
     }
   }
   &-container {

@@ -1,12 +1,34 @@
-$(window).scroll(function () {
-    if($('.main').hasClass('blog_page')){
-        if ($(this).scrollTop() > $('.blog_page-big_banner').height()){
-            $(".header").addClass("active");
-        } else{
-            $(".header").removeClass("active");
-        } 
-    }
-});
+if($('.main').hasClass('blog_page')){
+    var header = $('.header');
+	var classes = 'active';
+	var headerHeight = header.outerHeight();
+	var scroll = $(window).scrollTop();
+	var isScroll = false;
+
+	$(window).on('scroll', function() {
+		scroll = $(window).scrollTop();
+
+		if (scroll >= headerHeight) {
+			isScroll = true;
+			headerHeight = isScroll ? header.outerHeight() : null;
+			header.addClass(classes);
+
+			if (!header.hasClass('is-fixed')) {
+				header.css({'top': -headerHeight + 'px', 'transform': 'translateY(' + headerHeight + 'px)'}).addClass('is-fixed');
+
+				if (!isAbsoluteHeader) {
+					body.css('padding-top', headerHeight + 'px');
+				}
+			}
+		} else {
+			isScroll = false;
+			header.removeClass(classes + ' is-fixed').removeAttr('style');
+			if (!isAbsoluteHeader) {
+				body.css('padding-top', 0);
+			}
+		}
+	});
+}
 
 
 window.onbeforeunload = function () {
