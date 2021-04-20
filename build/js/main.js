@@ -172,6 +172,8 @@ $(function (){
             gsap.registerPlugin(ScrollTrigger);
             gsap.registerPlugin(ScrollToPlugin);
 
+            let currentSlide = 0;
+
             let titles = gsap.utils.toArray(".page-title li"),
                 sections = gsap.utils.toArray(".scrollable"),
                 projectBlocks = gsap.utils.toArray(".projects__blocks .projects__block"),
@@ -180,13 +182,29 @@ $(function (){
                 projectBlocksScroll = projectBlocks.length*500,
                 newsBlocksScroll = newsBlocks.length*500;
 
+            let linkData = {
+                '0': 0,
+                '1': scrollDurationHome,
+                '2': scrollDurationHome*2+projectBlocksScroll,
+                '3': scrollDurationHome*3+projectBlocksScroll,
+                '4': scrollDurationHome*4+projectBlocksScroll,
+                '5': scrollDurationHome*5+projectBlocksScroll,
+                '6': scrollDurationHome*6+projectBlocksScroll+newsBlocksScroll,
+            }
+
             let tl = gsap.timeline({
                 scrollTrigger: {
                     trigger: ".scroll",
                     pin: true,
-                    scrub: 1,
+                    scrub: true,
                     start: "top top",
-                    end: "+="+(scrollDurationHome*sections.length+projectBlocksScroll+newsBlocksScroll),
+                    end: "+="+(scrollDurationHome*(sections.length-1)+projectBlocksScroll+newsBlocksScroll),
+                    onUpdate: ({progress, direction, isActive}) => {
+                        let currentScroll = $('html').scrollTop();
+                        Object.keys(linkData).forEach(key => {
+                            if (currentScroll >= linkData[key] ) currentSlide = key;
+                        });
+                    },
                 }
             });
 
@@ -214,9 +232,14 @@ $(function (){
             let tl1 = gsap.timeline({
                 scrollTrigger: {
                     trigger: "body",
-                    scrub: 1,
+                    scrub: true,
                     start: "0 -"+0,
-                    snap: 1,
+                    snap: {
+                        snapTo: 1,
+                        duration: {min: 0.2, max: 0.5},
+                        delay: 0.2,
+                        ease: 'none'
+                    },
                     end: "+="+scrollDurationHome,
                     onUpdate: ({progress, direction, isActive}) => {
                         if (progress >= 0.9){
@@ -314,7 +337,7 @@ $(function (){
             let tl11 = gsap.timeline({
                 scrollTrigger: {
                     trigger: "body",
-                    scrub: 1,
+                    scrub: true,
                     start: "0 -"+scrollDurationHome,
                     end: "+="+projectBlocksScroll,
                 }
@@ -356,7 +379,7 @@ $(function (){
             let tl3 = gsap.timeline({
                 scrollTrigger: {
                     trigger: "body",
-                    scrub: 1,
+                    scrub: true,
                     start: "0 -"+(scrollDurationHome+projectBlocksScroll),
                     end: "+="+(scrollDurationHome),
                     onUpdate: ({progress, direction, isActive}) => {
@@ -393,7 +416,7 @@ $(function (){
             let tl31 = gsap.timeline({
                 scrollTrigger: {
                     trigger: "body",
-                    scrub: 1,
+                    scrub: true,
                     start: "0 -"+(scrollDurationHome+projectBlocksScroll+scrollDurationHome/2),
                     end: "+="+(scrollDurationHome/2),
                 }
@@ -415,7 +438,7 @@ $(function (){
             let tl4 = gsap.timeline({
                 scrollTrigger: {
                     trigger: "body",
-                    scrub: 1,
+                    scrub: true,
                     start: "0 -"+(scrollDurationHome*(sectionNumber-1)+projectBlocksScroll),
                     end: "+="+(scrollDurationHome),
                     onToggle: ({progress, direction, isActive}) => {
@@ -449,7 +472,7 @@ $(function (){
             let tl41 = gsap.timeline({
                 scrollTrigger: {
                     trigger: "body",
-                    scrub: 1,
+                    scrub: true,
                     start: "0 -"+(scrollDurationHome*(sectionNumber-1)+projectBlocksScroll+scrollDurationHome/2),
                     end: "+="+(scrollDurationHome/2),
                 }
@@ -474,7 +497,7 @@ $(function (){
             let tl5 = gsap.timeline({
                 scrollTrigger: {
                     trigger: "body",
-                    scrub: 1,
+                    scrub: true,
                     start: "0 -"+(scrollDurationHome*(sectionNumber-1)+projectBlocksScroll),
                     end: "+="+(scrollDurationHome),
                     onUpdate: ({progress, direction, isActive}) => {
@@ -512,7 +535,7 @@ $(function (){
             let tl51 = gsap.timeline({
                 scrollTrigger: {
                     trigger: "body",
-                    scrub: 1,
+                    scrub: true,
                     start: "0 -"+(scrollDurationHome*(sectionNumber-1)+projectBlocksScroll+scrollDurationHome/2),
                     end: "+="+(scrollDurationHome/2),
                 }
@@ -538,7 +561,7 @@ $(function (){
             let tl6 = gsap.timeline({
                 scrollTrigger: {
                     trigger: "body",
-                    scrub: 1,
+                    scrub: true,
                     start: "0 -"+(scrollDurationHome*(sectionNumber-1)+projectBlocksScroll),
                     end: "+="+(scrollDurationHome),
                     onUpdate: ({progress, direction, isActive}) => {
@@ -591,7 +614,7 @@ $(function (){
             let tl61 = gsap.timeline({
                 scrollTrigger: {
                     trigger: "body",
-                    scrub: 1,
+                    scrub: true,
                     start: "0 -"+(scrollDurationHome*sectionNumber+projectBlocksScroll),
                     end: "+="+newsBlocksScroll,
                 }
@@ -630,7 +653,7 @@ $(function (){
             let tl7 = gsap.timeline({
                 scrollTrigger: {
                     trigger: "body",
-                    scrub: 1,
+                    scrub: true,
                     start: "0 -"+(scrollDurationHome*(sectionNumber-1)+projectBlocksScroll+newsBlocksScroll),
                     end: "+="+(scrollDurationHome),
                     onToggle: ({progress, direction, isActive}) => {
@@ -666,7 +689,7 @@ $(function (){
             let tl71 = gsap.timeline({
                 scrollTrigger: {
                     trigger: "body",
-                    scrub: 1,
+                    scrub: true,
                     start: "0 -"+(scrollDurationHome*(sectionNumber-1)+projectBlocksScroll+newsBlocksScroll+scrollDurationHome/2),
                     end: "+="+(scrollDurationHome/2),
                 }
@@ -678,14 +701,18 @@ $(function (){
 
 
 
-
             let tlScroll = gsap.timeline({
                 scrollTrigger: {
                     trigger: "body",
-                    scrub: 1,
+                    scrub: true,
                     start: "0 -"+(scrollDurationHome+projectBlocksScroll),
                     end: "+="+(scrollDurationHome*(sections.length-3)),
-                    snap: 1 / (sections.length - 3),
+                    snap: {
+                        snapTo: 1 / (sections.length - 3),
+                        duration: {min: 0.2, max: 0.5},
+                        delay: 0.2,
+                        ease: 'none'
+                    },
                 }
             });
             tlScroll.to(sections, {
@@ -697,10 +724,15 @@ $(function (){
             let tlScrollLast = gsap.timeline({
                 scrollTrigger: {
                     trigger: "body",
-                    scrub: 1,
+                    scrub: true,
                     start: "0 -"+(scrollDurationHome*(sections.length-2)+projectBlocksScroll+newsBlocksScroll),
                     end: "+="+(scrollDurationHome),
-                    snap: 1,
+                    snap: {
+                        snapTo: 1,
+                        duration: {min: 0.2, max: 0.5},
+                        delay: 0.2,
+                        ease: 'none'
+                    }
                 }
             });
             tlScrollLast.to(sections, {
@@ -710,21 +742,178 @@ $(function (){
 
 
 
-            let linkData = {
-                '0': 0,
-                '1': scrollDurationHome,
-                '2': scrollDurationHome*2+projectBlocksScroll,
-                '3': scrollDurationHome*3+projectBlocksScroll,
-                '4': scrollDurationHome*4+projectBlocksScroll,
-                '5': scrollDurationHome*5+projectBlocksScroll,
-                '6': scrollDurationHome*6+projectBlocksScroll+newsBlocksScroll,
-            }
+
             $(document).on('click','.js-scroll-link',function (){
                 event.preventDefault();
                 let link = $(this).data('link'),
                     currentScroll = $('html').scrollTop();
 
-                $("html, body").animate({ scrollTop: parseInt(linkData[link]) }, (Math.abs(currentScroll-parseInt(linkData[link])))/2.5);
+                window.scrollTo(0, parseInt(linkData[link]));
+                switch (link) {
+                    case 0:
+                        tlScrollLast.progress(0);
+                        tlScroll.progress(0);
+                        tl7.progress(0);
+                        tl61.progress(0);
+                        tl6.progress(0);
+                        tl51.progress(0);
+                        tl5.progress(0);
+                        tl41.progress(0);
+                        tl4.progress(0);
+                        tl31.progress(0);
+                        tl3.progress(0);
+                        tl11.progress(0);
+                        tl1.progress(0);
+
+                        tlTitle7.progress(0).pause();
+                        tlTitle6.progress(0).pause();
+                        tlTitle5.progress(0).pause();
+                        tlTitle4.progress(0).pause();
+                        tlTitle3.progress(0).pause();
+                        tlTitle2.progress(0).pause();
+                        break;
+                    case 1:
+                        tlScrollLast.progress(0);
+                        tlScroll.progress(0);
+                        tl7.progress(0);
+                        tl61.progress(0);
+                        tl6.progress(0);
+                        tl51.progress(0);
+                        tl5.progress(0);
+                        tl41.progress(0);
+                        tl4.progress(0);
+                        tl31.progress(0);
+                        tl3.progress(0);
+                        tl11.progress(0);
+                        tl1.progress(1);
+
+                        tlTitle7.progress(0).pause();
+                        tlTitle6.progress(0).pause();
+                        tlTitle5.progress(0).pause();
+                        tlTitle4.progress(0).pause();
+                        tlTitle3.progress(0).pause();
+                        tlTitle2.progress(1).pause();
+                        break;
+                    case 2:
+                        tlScrollLast.progress(0);
+                        tlScroll.progress(0.25);
+                        tl7.progress(0);
+                        tl61.progress(0);
+                        tl6.progress(0);
+                        tl51.progress(0);
+                        tl5.progress(0);
+                        tl41.progress(0);
+                        tl4.progress(0);
+                        tl31.progress(1);
+                        tl3.progress(1);
+                        tl11.progress(1);
+                        tl1.progress(1);
+
+                        tlTitle7.progress(0).pause();
+                        tlTitle6.progress(0).pause();
+                        tlTitle5.progress(0).pause();
+                        tlTitle4.progress(0).pause();
+                        tlTitle3.progress(1).pause();
+                        tlTitle2.progress(1).pause();
+                        break;
+                    case 3:
+                        tlScrollLast.progress(0);
+                        tlScroll.progress(0.5);
+                        tl7.progress(0);
+                        tl61.progress(0);
+                        tl6.progress(0);
+                        tl51.progress(0);
+                        tl5.progress(0);
+                        tl41.progress(1);
+                        tl4.progress(1);
+                        tl31.progress(1);
+                        tl3.progress(1);
+                        tl11.progress(1);
+                        tl1.progress(1);
+
+                        tlTitle7.progress(0).pause();
+                        tlTitle6.progress(0).pause();
+                        tlTitle5.progress(0).pause();
+                        tlTitle4.progress(1).pause();
+                        tlTitle3.progress(1).pause();
+                        tlTitle2.progress(1).pause();
+                        break;
+                    case 4:
+                        tlScrollLast.progress(0);
+                        tlScroll.progress(0.75);
+                        tl7.progress(0);
+                        tl61.progress(0);
+                        tl6.progress(0);
+                        tl51.progress(1);
+                        tl5.progress(1);
+                        tl41.progress(1);
+                        tl4.progress(1);
+                        tl31.progress(1);
+                        tl3.progress(1);
+                        tl11.progress(1);
+                        tl1.progress(1);
+
+                        tlTitle7.progress(0).pause();
+                        tlTitle6.progress(0).pause();
+                        tlTitle5.progress(1).pause();
+                        tlTitle4.progress(1).pause();
+                        tlTitle3.progress(1).pause();
+                        tlTitle2.progress(1).pause();
+                        break;
+                    case 5:
+                        tlScrollLast.progress(0);
+                        tlScroll.progress(1);
+                        tl7.progress(0);
+                        tl61.progress(0);
+                        tl6.progress(1);
+                        tl51.progress(1);
+                        tl5.progress(1);
+                        tl41.progress(1);
+                        tl4.progress(1);
+                        tl31.progress(1);
+                        tl3.progress(1);
+                        tl11.progress(1);
+                        tl1.progress(1);
+
+                        tlTitle7.progress(0).pause();
+                        tlTitle6.progress(1).pause();
+                        tlTitle5.progress(1).pause();
+                        tlTitle4.progress(1).pause();
+                        tlTitle3.progress(1).pause();
+                        tlTitle2.progress(1).pause();
+                        break;
+                    case 6:
+                        tlScrollLast.progress(0.99);
+                        tlScroll.progress(1);
+                        tl7.progress(1);
+                        tl61.progress(1);
+                        tl6.progress(1);
+                        tl51.progress(1);
+                        tl5.progress(1);
+                        tl41.progress(1);
+                        tl4.progress(1);
+                        tl31.progress(1);
+                        tl3.progress(1);
+                        tl11.progress(1);
+                        tl1.progress(1);
+
+                        tlTitle7.progress(1).pause();
+                        tlTitle6.progress(1).pause();
+                        tlTitle5.progress(1).pause();
+                        tlTitle4.progress(1).pause();
+                        tlTitle3.progress(1).pause();
+                        tlTitle2.progress(1).pause();
+                        break;
+                    default:
+                        break;
+                }
+                gsap.set(sections, {xPercent: -100 * parseInt(link),ease: "none"},0);
+
+                $('.header__menu li').removeClass('active');
+                $('.header__menu li').eq(parseInt(link)).addClass('active');
+                gsap.set(titles, { y: "-100%" });
+                gsap.set(titles[parseInt(link)], { y: "0" });
+                //$("html, body").animate({ scrollTop: parseInt(linkData[link]) }, (Math.abs(currentScroll-parseInt(linkData[link])))/2.5);
             });
         } else {
             //mobile
