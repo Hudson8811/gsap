@@ -36,6 +36,17 @@
 /* my scripts */
 
 // partials/main.js
+$(window).scroll(function () {
+    if($('.main').hasClass('blog_page')){
+        if ($(this).scrollTop() > $('.blog_page-big_banner').height()){
+            $(".header").addClass("active");
+        } else{
+            $(".header").removeClass("active");
+        } 
+    }
+});
+
+
 window.onbeforeunload = function () {
     window.scrollTo(0, 0);
 }

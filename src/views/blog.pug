@@ -1,0 +1,138 @@
+extends layouts/blog_layout
+block favicon
+	link(rel='shortcut icon' href='img/favicon_1.ico' type='image/x-icon')
+block vars
+	-
+		const page = {
+			title: 'Blog'
+		};
+
+
+
+
+block main
+	canvas#noise.noise
+	.header
+		canvas#noise_menu.noise.noise--inner
+		.header__left
+			.header__letter P
+			.header__socials
+				a(href="" target="_blank")
+					svg
+						use(xlink:href="./svg/sprite.svg#fb")
+				a(href="" target="_blank")
+					svg
+						use(xlink:href="./svg/sprite.svg#tw")
+				a(href="" target="_blank")
+					svg
+						use(xlink:href="./svg/sprite.svg#in")
+		.header__right
+			ul.blog_page-menu
+				li
+					a.js-scroll-link(href="#") HOME
+				li
+					a.js-scroll-link(href="#") Projects
+				li
+					a.js-scroll-link(href="#") awwards
+				li
+					a.js-scroll-link(href="#") testimonials
+				li
+					a.js-scroll-link(href="#") experience
+				li.active
+					a.js-scroll-link(href="#") blog
+				li
+					a.js-scroll-link(href="#") CONTACT
+
+			.header__phone
+				a(href="tel:+23155908368") +2(315) 590 83 68
+	
+	section.blog_page-big_banner
+		.blog_page-container
+			.small February 17, 2021
+			.h1 Devices 
+			.h1 Mockups
+
+	section.blog_page-content
+		.blog_page-container
+			.blog_page-text 
+				.blog_page-h1 Beast creature days.
+				.small This response is important for our ability to learn from mistakes, but it alsogives rise to self-criticism, because it is part of the threat-protection system. In other words, what keeps us safe can go too far, and keep us too safe. In fact it can trigger self-censoring.
+				.small One touch of a red-hot stove is usually all we need to avoid that kind of discomfort in the future. The same is true as we experience the emotional sensation of stress from our first instances of social rejection or ridicule. We quickly learn to fear and thus automatically avoid potentially stressful situations of all kinds, including the most common of all: 
+			img.blog_page-banner(src="images/big-banner_item1.png", alt="")
+			.blog_page-text
+				.blog_page-h1 Methods for Everyone
+				.small Everything along the way, to and from, fascinated her: every pebble, ant, stick, leaf, blade of grass, and crack in the sidewalk was something to be picked up, looked at, tasted, smelled, and shaken. Everything was interesting to her. She knew nothing. I knew everything…been there, done that. She was in the moment, I was in the past. She was mindful. I was mindless.
+				.small One touch of a red-hot stove is usually all we need to avoid that kind of discomfort in the future. The same is true as we experience the emotional sensation of stress from our first instances of social rejection or ridicule. We quickly learn to fear and thus automatically avoid potentially stressful situations of all kinds, including the most common of all: making mistakes.
+			img.blog_page-banner(src="images/big-banner_item2.png", alt="")
+
+			.blog_page-reviws
+				.blog_page-reviws_text Our greatest weakness lies in giving up. The most certain way to succeed is always to try just one more time. emotional sensation of stress from our firs
+				.blog_page-reviws_name.small Paul
+				.blog_page-reviws_place.small Elite Author
+			
+			ul.blog_page-tags
+				li.blog_page-tags_item.blog_page-tags_title Tags: 
+				li.blog_page-tags_item #[a(href="#", class="blog_page-tags_link") Follow], 
+				li.blog_page-tags_item #[a(href="#", class="blog_page-tags_link") Like], 
+				li.blog_page-tags_item #[a(href="#", class="blog_page-tags_link") Photography]
+			
+			ul.blog_page-share 
+				li.blog_page-share_item.blog_page-share_title Share: 
+				li.blog_page-share_item
+					a(href="#")
+						svg
+							use(xlink:href="./svg/sprite.svg#fb")
+
+				li.blog_page-share_item
+					a(href="#")
+						svg
+							use(xlink:href="./svg/sprite.svg#tw")
+
+				li.blog_page-share_item
+					a(href="#")
+						svg
+							use(xlink:href="./svg/sprite.svg#inst")
+
+	section.blog_page-comments
+		.blog_page-comments_container
+			.blog_page-h1 Comments
+			.blog_page-comments_wrapper
+				.blog_page-comments_block
+					.blog_page-comments_icon
+						img(src="images/reviews.png", alt="")
+					.blog_page-comments_content
+						.blog_page-comments_heading
+							.small Hayley
+							.blog_page-comments_date Jul 03, 2020 at 15 hours ago
+						.blog_page-comments_text 
+							.small Everything along the way, to and from, fascinated her: every pebble, ant, stick, leaf, blade of grass, and crack in the sidewalk was something to be picked up
+						a.blog_page-comments_btn(href="#")  
+							span Reply
+				
+				.blog_page-comments_block
+					.blog_page-comments_icon
+						img(src="images/reviews2.png", alt="")
+					.blog_page-comments_content
+						.blog_page-comments_heading
+							.small Harry
+							.blog_page-comments_date Jul 03, 2020 at 15 hours ago
+						.blog_page-comments_text 
+							.small Everything along the way, to and from, fascinated her: every pebble, ant, stick, leaf, blade of grass, and crack in the sidewalk was something to be picked up
+						a.blog_page-comments_btn(href="#")  
+							span Reply
+			
+			form.content__form
+				.content__form-title Post a comment
+				label.content__form-input
+					input(type="text" name="name")
+					span.content__form-placeholder name
+				label.content__form-input
+					input(type="email" name="emal" required="")
+					span.content__form-placeholder EMAIL *
+				label.content__form-input
+					input(type="text" name="msg" required="")
+					span.content__form-placeholder MESSAGE *
+				.content__form-btn
+					button.btn.btn--arrow(type="submit")
+						svg
+							use(xlink:href="./svg/sprite.svg#arrow")
