@@ -462,24 +462,6 @@
         @include mobile{
           font-size: vw3(16);
           opacity: 1;
-          &::after{
-            content: "";
-            position: absolute;
-            right: vw2(16);
-            top: 50%;
-            transform: translateY(-50%);
-            width: vw2(19);
-            height: vw(19);
-            background: url(../img/arrow-link.svg) center center no-repeat;
-            background-size: contain;
-            pointer-events: none;
-            user-select: none;
-            @include mobile{
-              right: vw3(16);
-              width: vw3(16);
-              height: vw3(16);
-            }
-          }
         }
         +li{
           margin-top: -1px;
@@ -502,6 +484,24 @@
           position: relative;
           @include mobile{
             padding: vw3(9) vw3(32) vw3(9) vw3(20);
+            &:not(.noicon)::after{
+              content: "";
+              position: absolute;
+              right: vw2(16);
+              top: 50%;
+              transform: translateY(-50%);
+              width: vw2(19);
+              height: vw(19);
+              background: url(../img/arrow-link.svg) center center no-repeat;
+              background-size: contain;
+              pointer-events: none;
+              user-select: none;
+              @include mobile{
+                right: vw3(16);
+                width: vw3(16);
+                height: vw3(16);
+              }
+            }
           }
         }
         &:hover{
@@ -510,7 +510,7 @@
         &.active{
           opacity: 1;
           a{
-            &::after{
+            &:not(.noicon)::after{
               content: "";
               position: absolute;
               right: vw2(16);
