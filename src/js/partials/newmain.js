@@ -666,6 +666,16 @@ $(function (){
 
                 $("html, body").animate({ scrollTop: parseInt(linkData[link]) }, (Math.abs(currentScroll-parseInt(linkData[link])))/2.5);
             });
+        } else {
+            //mobile
+            $(document).on('click','.js-scroll-link',function (){
+                event.preventDefault();
+                let href = $(this).attr('href'),
+                    topPos = $(href).offset(),
+                    header = $('.header').height();
+                $("html, body").animate({ scrollTop: topPos.top - header }, 500);
+
+            });
         }
 
     });

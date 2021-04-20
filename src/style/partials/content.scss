@@ -600,7 +600,7 @@
         width: vw2(310);
         margin-right: vw2(58);
         @include mobile{
-          width: calc(100% - 22.66vw);
+          width: calc(100% - 23vw);
           margin-right: 0;
         }
         p{
@@ -950,7 +950,6 @@
     justify-content: space-between;
     @include mobile{
       flex-wrap: wrap;
-      justify-content: center;
       margin-top: vw(30);
     }
   }
