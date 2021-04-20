@@ -36,8 +36,8 @@
 /* my scripts */
 
 // partials/main.js
-(function() {
-	var header = $('.header');
+if($('.main').hasClass('blog_page')){
+    var header = $('.header');
 	var classes = 'active';
 	var headerHeight = header.outerHeight();
 	var scroll = $(window).scrollTop();
@@ -66,7 +66,7 @@
 			}
 		}
 	});
-})();
+}
 
 
 window.onbeforeunload = function () {
