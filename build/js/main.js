@@ -191,20 +191,22 @@ $(function (){
                     '6': scrollDurationHome * 6 + projectBlocksScroll + newsBlocksScroll,
                 }
 
-                let tl = gsap.timeline({
-                    scrollTrigger: {
-                        trigger: ".scroll",
-                        pin: true,
-                        scrub: true,
-                        start: "top top",
-                        end: "+=" + (scrollDurationHome * (sections.length - 1) + projectBlocksScroll + newsBlocksScroll),
-                        onUpdate: ({progress, direction, isActive}) => {
-                            let currentScroll = $('html').scrollTop();
-                            Object.keys(linkData).forEach(key => {
-                                if (currentScroll >= linkData[key]) currentSlide = key;
-                            });
-                        },
-                    }
+
+                let tl = gsap.timeline();
+
+                let st = ScrollTrigger.create({
+                    trigger: ".scroll",
+                    pin: true,
+                    scrub: true,
+                    start: "top top",
+                    end: "+=" + (scrollDurationHome * (sections.length - 1) + projectBlocksScroll + newsBlocksScroll),
+                    onUpdate: ({progress, direction, isActive}) => {
+                        let currentScroll = $('html').scrollTop();
+                        Object.keys(linkData).forEach(key => {
+                            if (currentScroll >= linkData[key]) currentSlide = key;
+                        });
+                    },
+                    animation: tl
                 });
 
 
@@ -222,44 +224,47 @@ $(function (){
                 tlTitle2.fromTo(titles[sectionNumber], {y: "100%"},{y: "0", duration: 0.2,});
                 tlTitle2.fromTo(titles[sectionNumber - 1], {y: "0"}, {y: "-100%", duration: 0.2,}, 0);
 
+                let blockNavigation = false;
 
-
-                let tl1 = gsap.timeline({
-                    scrollTrigger: {
-                        trigger: "body",
-                        scrub: true,
-                        start: "0 -" + 0,
-                        snap: {
-                            snapTo: 1,
-                            duration: {min: 0.2, max: 0.5},
-                            delay: 0.2,
-                            ease: 'none'
-                        },
-                        end: "+=" + scrollDurationHome,
-                        onUpdate: ({progress, direction, isActive}) => {
-                            if (progress >= 0.9) {
-                                tlProjectBtn.play();
-                            } else {
-                                tlProjectBtn.reverse();
-                            }
-                        },
-                        onToggle: ({progress, direction, isActive}) => {
-                            if (!isActive && direction > 0) {
-                                if (!skipMode) tlTitle2.play();
-                                $('.header__menu li').removeClass('active');
-                                $('.header__menu li').eq(1).addClass('active');
-                            } else if (isActive && direction < 0) {
-                                if (!skipMode) tlTitle2.reverse();
-                                $('.header__menu li').removeClass('active');
-                                $('.header__menu li').eq(0).addClass('active');
-                            }
+                let tl1 = gsap.timeline();
+                let st1 = ScrollTrigger.create({
+                    trigger: "body",
+                    scrub:1,
+                    start: "0 -" + 0,
+                    snap: {
+                        snapTo: 1,
+                        duration: {min: 0.2, max: 0.5},
+                        delay: 0.2,
+                        ease: 'none'
+                    },
+                    end: "+=" + scrollDurationHome,
+                    onUpdate: ({progress, direction, isActive}) => {
+                        if (progress >= 0.9) {
+                            tlProjectBtn.play();
+                        } else {
+                            tlProjectBtn.reverse();
                         }
-                    }
+                        blockNavigation = true
+                    },
+                    onScrubComplete: ({progress, direction, isActive}) => {
+                        blockNavigation = false
+                    },
+                    onToggle: ({progress, direction, isActive}) => {
+                        if (!isActive && direction > 0) {
+                            if (!skipMode) tlTitle2.play();
+                            $('.header__menu li').removeClass('active');
+                            $('.header__menu li').eq(1).addClass('active');
+                        } else if (isActive && direction < 0) {
+                            if (!skipMode) tlTitle2.reverse();
+                            $('.header__menu li').removeClass('active');
+                            $('.header__menu li').eq(0).addClass('active');
+                        }
+                    },
+                    animation: tl1
                 });
-                tl1.to(sections, {
-                    xPercent: -100 * sectionNumber,
-                    ease: "none"
-                }, 0);
+
+
+                tl1.fromTo(sections,{xPercent: 0}, {xPercent: -100, ease: "none"}, 0);
 
                 gsap.delayedCall(0.4, function () {
                     let tl1 = new TimelineMax();
@@ -335,13 +340,13 @@ $(function (){
                     tempHeight += height;
                 });
 
-                let tl11 = gsap.timeline({
-                    scrollTrigger: {
-                        trigger: "body",
-                        scrub: true,
-                        start: "0 -" + scrollDurationHome,
-                        end: "+=" + projectBlocksScroll,
-                    }
+                let tl11 = gsap.timeline();
+                let st11 = ScrollTrigger.create({
+                    trigger: "body",
+                    scrub:1,
+                    start: "0 -" + scrollDurationHome,
+                    end: "+=" + projectBlocksScroll,
+                    animation: tl11
                 });
                 let projectsBlockHeight = 0;
                 $('.projects__block').each(function () {
@@ -358,7 +363,6 @@ $(function (){
                         });
                         $('.projects__menu li').removeClass('active');
                         $('.projects__menu li').eq(maxIndex).addClass('active');
-
                     }
                 }, 0);
 
@@ -381,33 +385,32 @@ $(function (){
                 tlTitle3.fromTo(titles[sectionNumber - 1], {y: "0"}, {y: "-100%", duration: 0.2,}, 0);
 
 
-                let tl3 = gsap.timeline({
-                    scrollTrigger: {
-                        trigger: "body",
-                        scrub: true,
-                        start: "0 -" + (scrollDurationHome + projectBlocksScroll),
-                        end: "+=" + (scrollDurationHome),
-                        onUpdate: ({progress, direction, isActive}) => {
-                            if (progress >= 0.9) {
-                                tlAvardsBtn.play();
-                            } else {
-                                tlAvardsBtn.reverse();
-                            }
-                        },
-                        onToggle: ({progress, direction, isActive}) => {
-                            if (!isActive && direction > 0) {
-                                if (!skipMode) tlTitle3.play();
-                                $('.header__menu li').removeClass('active');
-                                $('.header__menu li').eq(2).addClass('active');
-                            } else if (isActive && direction < 0) {
-                                if (!skipMode) tlTitle3.reverse();
-                                $('.header__menu li').removeClass('active');
-                                $('.header__menu li').eq(1).addClass('active');
-                            }
+                let tl3 = gsap.timeline();
+                let st3 = ScrollTrigger.create({
+                    trigger: "body",
+                    scrub:1,
+                    start: "0 -" + (scrollDurationHome + projectBlocksScroll),
+                    end: "+=" + (scrollDurationHome),
+                    onUpdate: ({progress, direction, isActive}) => {
+                        if (progress >= 0.9) {
+                            tlAvardsBtn.play();
+                        } else {
+                            tlAvardsBtn.reverse();
                         }
-                    }
+                    },
+                    onToggle: ({progress, direction, isActive}) => {
+                        if (!isActive && direction > 0) {
+                            if (!skipMode) tlTitle3.play();
+                            $('.header__menu li').removeClass('active');
+                            $('.header__menu li').eq(2).addClass('active');
+                        } else if (isActive && direction < 0) {
+                            if (!skipMode) tlTitle3.reverse();
+                            $('.header__menu li').removeClass('active');
+                            $('.header__menu li').eq(1).addClass('active');
+                        }
+                    },
+                    animation: tl3
                 });
-
 
                 let titlesAwards = gsap.utils.toArray(".awards .content__title > *");
                 titlesAwards.forEach((title, index) => {
@@ -418,13 +421,13 @@ $(function (){
                     }
                 });
 
-                let tl31 = gsap.timeline({
-                    scrollTrigger: {
-                        trigger: "body",
-                        scrub: true,
-                        start: "0 -" + (scrollDurationHome + projectBlocksScroll + scrollDurationHome / 2),
-                        end: "+=" + (scrollDurationHome / 2),
-                    }
+                let tl31 = gsap.timeline();
+                let st31 = ScrollTrigger.create({
+                    trigger: "body",
+                    scrub:1,
+                    start: "0 -" + (scrollDurationHome + projectBlocksScroll + scrollDurationHome / 2),
+                    end: "+=" + (scrollDurationHome / 2),
+                    animation: tl31
                 });
                 tl31.from('.awards .content__subtitle', {autoAlpha: 0, top: -200, ease: Power1.easeOut}, 0);
                 let awardsAwards = gsap.utils.toArray(".awards__list .content__award");
@@ -440,24 +443,24 @@ $(function (){
                 tlTitle4.fromTo(titles[sectionNumber], {y: "100%"},{y: "0", duration: 0.2,});
                 tlTitle4.fromTo(titles[sectionNumber - 1], {y: "0"}, {y: "-100%", duration: 0.2,}, 0);
 
-                let tl4 = gsap.timeline({
-                    scrollTrigger: {
-                        trigger: "body",
-                        scrub: true,
-                        start: "0 -" + (scrollDurationHome * (sectionNumber - 1) + projectBlocksScroll),
-                        end: "+=" + (scrollDurationHome),
-                        onToggle: ({progress, direction, isActive}) => {
-                            if (!isActive && direction > 0) {
-                                if (!skipMode) tlTitle4.play();
-                                $('.header__menu li').removeClass('active');
-                                $('.header__menu li').eq(3).addClass('active');
-                            } else if (isActive && direction < 0) {
-                                if (!skipMode) tlTitle4.reverse();
-                                $('.header__menu li').removeClass('active');
-                                $('.header__menu li').eq(2).addClass('active');
-                            }
+                let tl4 = gsap.timeline();
+                let st4 = ScrollTrigger.create({
+                    trigger: "body",
+                    scrub:1,
+                    start: "0 -" + (scrollDurationHome * (sectionNumber - 1) + projectBlocksScroll),
+                    end: "+=" + (scrollDurationHome),
+                    onToggle: ({progress, direction, isActive}) => {
+                        if (!isActive && direction > 0) {
+                            if (!skipMode) tlTitle4.play();
+                            $('.header__menu li').removeClass('active');
+                            $('.header__menu li').eq(3).addClass('active');
+                        } else if (isActive && direction < 0) {
+                            if (!skipMode) tlTitle4.reverse();
+                            $('.header__menu li').removeClass('active');
+                            $('.header__menu li').eq(2).addClass('active');
                         }
-                    }
+                    },
+                    animation: tl4
                 });
 
                 let titlesTesti = gsap.utils.toArray(".testimonials .content__title > *");
@@ -474,13 +477,13 @@ $(function (){
                 });
 
 
-                let tl41 = gsap.timeline({
-                    scrollTrigger: {
-                        trigger: "body",
-                        scrub: true,
-                        start: "0 -" + (scrollDurationHome * (sectionNumber - 1) + projectBlocksScroll + scrollDurationHome / 2),
-                        end: "+=" + (scrollDurationHome / 2),
-                    }
+                let tl41 = gsap.timeline();
+                let st41 = ScrollTrigger.create({
+                    trigger: "body",
+                    scrub:1,
+                    start: "0 -" + (scrollDurationHome * (sectionNumber - 1) + projectBlocksScroll + scrollDurationHome / 2),
+                    end: "+=" + (scrollDurationHome / 2),
+                    animation: tl41
                 });
                 tl41.from('.testimonials .content__subtitle', {autoAlpha: 0, top: -200, ease: Power1.easeOut}, 0);
 
@@ -503,31 +506,31 @@ $(function (){
                 tlTitle5.fromTo(titles[sectionNumber - 1], {y: "0"}, {y: "-100%", duration: 0.2,}, 0);
 
 
-                let tl5 = gsap.timeline({
-                    scrollTrigger: {
-                        trigger: "body",
-                        scrub: true,
-                        start: "0 -" + (scrollDurationHome * (sectionNumber - 1) + projectBlocksScroll),
-                        end: "+=" + (scrollDurationHome),
-                        onUpdate: ({progress, direction, isActive}) => {
-                            if (progress >= 0.9) {
-                                tlExpBtn.play();
-                            } else {
-                                tlExpBtn.reverse();
-                            }
-                        },
-                        onToggle: ({progress, direction, isActive}) => {
-                            if (!isActive && direction > 0) {
-                                if (!skipMode) tlTitle5.play();
-                                $('.header__menu li').removeClass('active');
-                                $('.header__menu li').eq(4).addClass('active');
-                            } else if (isActive && direction < 0) {
-                                if (!skipMode) tlTitle5.reverse();
-                                $('.header__menu li').removeClass('active');
-                                $('.header__menu li').eq(3).addClass('active');
-                            }
+                let tl5 = gsap.timeline();
+                let st5 = ScrollTrigger.create({
+                    trigger: "body",
+                    scrub:1,
+                    start: "0 -" + (scrollDurationHome * (sectionNumber - 1) + projectBlocksScroll),
+                    end: "+=" + (scrollDurationHome),
+                    onUpdate: ({progress, direction, isActive}) => {
+                        if (progress >= 0.9) {
+                            tlExpBtn.play();
+                        } else {
+                            tlExpBtn.reverse();
                         }
-                    }
+                    },
+                    onToggle: ({progress, direction, isActive}) => {
+                        if (!isActive && direction > 0) {
+                            if (!skipMode) tlTitle5.play();
+                            $('.header__menu li').removeClass('active');
+                            $('.header__menu li').eq(4).addClass('active');
+                        } else if (isActive && direction < 0) {
+                            if (!skipMode) tlTitle5.reverse();
+                            $('.header__menu li').removeClass('active');
+                            $('.header__menu li').eq(3).addClass('active');
+                        }
+                    },
+                    animation: tl5
                 });
 
 
@@ -541,13 +544,13 @@ $(function (){
                 });
 
 
-                let tl51 = gsap.timeline({
-                    scrollTrigger: {
-                        trigger: "body",
-                        scrub: true,
-                        start: "0 -" + (scrollDurationHome * (sectionNumber - 1) + projectBlocksScroll + scrollDurationHome / 2),
-                        end: "+=" + (scrollDurationHome / 2),
-                    }
+                let tl51 = gsap.timeline();
+                let st51 = ScrollTrigger.create({
+                    trigger: "body",
+                    scrub:1,
+                    start: "0 -" + (scrollDurationHome * (sectionNumber - 1) + projectBlocksScroll + scrollDurationHome / 2),
+                    end: "+=" + (scrollDurationHome / 2),
+                    animation: tl51
                 });
                 let awardsExp = gsap.utils.toArray(".experience__list .content__award");
                 awardsExp.forEach((award, index) => {
@@ -567,33 +570,32 @@ $(function (){
                 tlTitle6.fromTo(titles[sectionNumber - 1], {y: "0"}, {y: "-100%", duration: 0.2,}, 0);
 
 
-                let tl6 = gsap.timeline({
-                    scrollTrigger: {
-                        trigger: "body",
-                        scrub: true,
-                        start: "0 -" + (scrollDurationHome * (sectionNumber - 1) + projectBlocksScroll),
-                        end: "+=" + (scrollDurationHome),
-                        onUpdate: ({progress, direction, isActive}) => {
-                            if (progress >= 0.9) {
-                                tlNewsBtn.play();
-                            } else {
-                                tlNewsBtn.reverse();
-                            }
-                        },
-                        onToggle: ({progress, direction, isActive}) => {
-                            if (!isActive && direction > 0) {
-                                if (!skipMode) tlTitle6.play();
-                                $('.header__menu li').removeClass('active');
-                                $('.header__menu li').eq(5).addClass('active');
-                            } else if (isActive && direction < 0) {
-                                if (!skipMode) tlTitle6.reverse();
-                                $('.header__menu li').removeClass('active');
-                                $('.header__menu li').eq(4).addClass('active');
-                            }
+                let tl6 = gsap.timeline();
+                let st6 = ScrollTrigger.create({
+                    trigger: "body",
+                    scrub:1,
+                    start: "0 -" + (scrollDurationHome * (sectionNumber - 1) + projectBlocksScroll),
+                    end: "+=" + (scrollDurationHome),
+                    onUpdate: ({progress, direction, isActive}) => {
+                        if (progress >= 0.9) {
+                            tlNewsBtn.play();
+                        } else {
+                            tlNewsBtn.reverse();
                         }
-                    }
+                    },
+                    onToggle: ({progress, direction, isActive}) => {
+                        if (!isActive && direction > 0) {
+                            if (!skipMode) tlTitle6.play();
+                            $('.header__menu li').removeClass('active');
+                            $('.header__menu li').eq(5).addClass('active');
+                        } else if (isActive && direction < 0) {
+                            if (!skipMode) tlTitle6.reverse();
+                            $('.header__menu li').removeClass('active');
+                            $('.header__menu li').eq(4).addClass('active');
+                        }
+                    },
+                    animation: tl6
                 });
-
 
                 let titlesNews = gsap.utils.toArray(".news .content__title > *");
                 titlesNews.forEach((title, index) => {
@@ -620,13 +622,13 @@ $(function (){
                     }
                     tempHeight += height;
                 });
-                let tl61 = gsap.timeline({
-                    scrollTrigger: {
-                        trigger: "body",
-                        scrub: true,
-                        start: "0 -" + (scrollDurationHome * sectionNumber + projectBlocksScroll),
-                        end: "+=" + newsBlocksScroll,
-                    }
+                let tl61 = gsap.timeline();
+                let st61 = ScrollTrigger.create({
+                    trigger: "body",
+                    scrub:1,
+                    start: "0 -" + (scrollDurationHome * sectionNumber + projectBlocksScroll),
+                    end: "+=" + newsBlocksScroll,
+                    animation: tl61
                 });
                 let newsBlockHeight = 0;
                 $('.news__block').each(function () {
@@ -658,24 +660,24 @@ $(function (){
                 tlTitle7.fromTo(titles[sectionNumber - 1], {y: "0"}, {y: "-100%", duration: 0.2,}, 0);
 
 
-                let tl7 = gsap.timeline({
-                    scrollTrigger: {
-                        trigger: "body",
-                        scrub: true,
-                        start: "0 -" + (scrollDurationHome * (sectionNumber - 1) + projectBlocksScroll + newsBlocksScroll),
-                        end: "+=" + (scrollDurationHome),
-                        onToggle: ({progress, direction, isActive}) => {
-                            if (!isActive && direction > 0) {
-                                if (!skipMode) tlTitle7.play();
-                                $('.header__menu li').removeClass('active');
-                                $('.header__menu li').eq(6).addClass('active');
-                            } else if (isActive && direction < 0) {
-                                if (!skipMode) tlTitle7.reverse();
-                                $('.header__menu li').removeClass('active');
-                                $('.header__menu li').eq(5).addClass('active');
-                            }
+                let tl7 = gsap.timeline();
+                let st7 = ScrollTrigger.create({
+                    trigger: "body",
+                    scrub:1,
+                    start: "0 -" + (scrollDurationHome * (sectionNumber - 1) + projectBlocksScroll + newsBlocksScroll),
+                    end: "+=" + (scrollDurationHome),
+                    onToggle: ({progress, direction, isActive}) => {
+                        if (!isActive && direction > 0) {
+                            if (!skipMode) tlTitle7.play();
+                            $('.header__menu li').removeClass('active');
+                            $('.header__menu li').eq(6).addClass('active');
+                        } else if (isActive && direction < 0) {
+                            if (!skipMode) tlTitle7.reverse();
+                            $('.header__menu li').removeClass('active');
+                            $('.header__menu li').eq(5).addClass('active');
                         }
-                    }
+                    },
+                    animation: tl7
                 });
 
 
@@ -694,13 +696,13 @@ $(function (){
                     tl7.from(title, {autoAlpha: 0, right: -700 - 150 * index, ease: Power1.easeOut}, 0);
                 });
 
-                let tl71 = gsap.timeline({
-                    scrollTrigger: {
-                        trigger: "body",
-                        scrub: true,
-                        start: "0 -" + (scrollDurationHome * (sectionNumber - 1) + projectBlocksScroll + newsBlocksScroll + scrollDurationHome / 2),
-                        end: "+=" + (scrollDurationHome / 2),
-                    }
+                let tl71 = gsap.timeline();
+                let st71 = ScrollTrigger.create({
+                    trigger: "body",
+                    scrub:1,
+                    start: "0 -" + (scrollDurationHome * (sectionNumber - 1) + projectBlocksScroll + newsBlocksScroll + scrollDurationHome / 2),
+                    end: "+=" + (scrollDurationHome / 2),
+                    animation: tl71
                 });
                 tl71.from('.contacts .content__subtitle', {autoAlpha: 0, top: -200, ease: Power1.easeOut}, 0);
                 tl71.from('.contacts .content__brief', {autoAlpha: 0, left: -400, ease: Power1.easeOut}, 0);
@@ -708,44 +710,49 @@ $(function (){
                 //contacts end
 
 
-                let tlScroll = gsap.timeline({
-                    scrollTrigger: {
-                        trigger: "body",
-                        scrub: true,
-                        start: "0 -" + (scrollDurationHome + projectBlocksScroll),
-                        end: "+=" + (scrollDurationHome * (sections.length - 3)),
-                        snap: {
-                            snapTo: 0.25,
-                            duration: {min: 0.2, max: 0.5},
-                            delay: 0.2,
-                            ease: 'none'
-                        },
-                    }
+                let tlScroll = gsap.timeline();
+                let stScroll = ScrollTrigger.create({
+                    trigger: "body",
+                    scrub:1,
+                    start: "0 -" + (scrollDurationHome + projectBlocksScroll),
+                    end: "+=" + (scrollDurationHome * (sections.length - 3)),
+                    snap: {
+                        snapTo: 0.25,
+                        duration: {min: 0.2, max: 0.5},
+                        delay: 0.2,
+                        ease: 'none'
+                    },
+                    onUpdate: function () {
+                        blockNavigation = true
+                    },
+                    onScrubComplete: ({progress, direction, isActive}) => {
+                        blockNavigation = false
+                    },
+                    animation: tlScroll
                 });
-                tlScroll.to(sections, {
-                    xPercent: -100 * (sections.length - 2),
-                    ease: "none"
-                }, 0);
+                tlScroll.fromTo(sections, {xPercent: -100}, {xPercent: -100 * (sections.length - 2),ease: "none"}, 0);
 
-
-                let tlScrollLast = gsap.timeline({
-                    scrollTrigger: {
-                        trigger: "body",
-                        scrub: true,
-                        start: "0 -" + (scrollDurationHome * (sections.length - 2) + projectBlocksScroll + newsBlocksScroll),
-                        end: "+=" + (scrollDurationHome),
-                        snap: {
-                            snapTo: 1,
-                            duration: {min: 0.2, max: 0.5},
-                            delay: 0.2,
-                            ease: 'none'
-                        }
-                    }
+                let tlScrollLast = gsap.timeline();
+                let stScrollLast = ScrollTrigger.create({
+                    trigger: "body",
+                    scrub:1,
+                    start: "0 -" + (scrollDurationHome * (sections.length - 2) + projectBlocksScroll + newsBlocksScroll),
+                    end: "+=" + (scrollDurationHome),
+                    snap: {
+                        snapTo: 1,
+                        duration: {min: 0.2, max: 0.5},
+                        delay: 0.2,
+                        ease: 'none'
+                    },
+                    onUpdate: function () {
+                        blockNavigation = true
+                    },
+                    onScrubComplete: ({progress, direction, isActive}) => {
+                        blockNavigation = false
+                    },
+                    animation: tlScrollLast
                 });
-                tlScrollLast.to(sections, {
-                    xPercent: -100 * (sections.length - 1),
-                    ease: "none"
-                }, 0);
+                tlScrollLast.fromTo(sections, {xPercent: -100*(sections.length - 2)}, {xPercent: -100 * (sections.length - 1),ease: "none"}, 0);
 
                 gsap.set(titles, {y: "100%"});
 
@@ -753,111 +760,34 @@ $(function (){
                     gsap.to(titles[0], {y: "0", duration: 0.2});
                 });
 
+                gsap.set(sections, {xPercent: 0});
 
                 $(document).on('click', '.js-scroll-link', function () {
                     event.preventDefault();
-                    skipMode = true;
-                    let link = $(this).data('link'),
-                        currentScroll = $('html').scrollTop();
+                    if (!blockNavigation){
+                        skipMode = true;
+                        let link = $(this).data('link'),
+                            currentScroll = $('html').scrollTop();
 
-                    /*window.scrollTo(0, parseInt(linkData[link]));
-                    switch (link) {
-                        case 0:
-                            tlScrollLast.progress(0);
-                            tlScroll.progress(0);
-                            tl1.progress(0);
 
-                            tlTitle7.progress(0).pause();
-                            tlTitle6.progress(0).pause();
-                            tlTitle5.progress(0).pause();
-                            tlTitle4.progress(0).pause();
-                            tlTitle3.progress(0).pause();
-                            tlTitle2.progress(0).pause();
-                            break;
-                        case 1:
-                            tlScrollLast.progress(0);
-                            tlScroll.progress(0);
-                            tl1.progress(1);
-
-                            tlTitle7.progress(0).pause();
-                            tlTitle6.progress(0).pause();
-                            tlTitle5.progress(0).pause();
-                            tlTitle4.progress(0).pause();
-                            tlTitle3.progress(0).pause();
-                            tlTitle2.progress(1).pause();
-                            break;
-                        case 2:
-                            tlScrollLast.progress(0);
-                            tlScroll.progress(0.25);
-                            tl1.progress(1);
-
-                            tlTitle7.progress(0).pause();
-                            tlTitle6.progress(0).pause();
-                            tlTitle5.progress(0).pause();
-                            tlTitle4.progress(0).pause();
-                            tlTitle3.progress(1).pause();
-                            tlTitle2.progress(1).pause();
-                            break;
-                        case 3:
-                            tlScrollLast.progress(0);
-                            tlScroll.progress(0.5);
-                            tl1.progress(1);
-
-                            tlTitle7.progress(0).pause();
-                            tlTitle6.progress(0).pause();
-                            tlTitle5.progress(0).pause();
-                            tlTitle4.progress(1).pause();
-                            tlTitle3.progress(1).pause();
-                            tlTitle2.progress(1).pause();
-                            break;
-                        case 4:
-                            tlScrollLast.progress(0);
-                            tlScroll.progress(0.75);
-                            tl1.progress(1);
-
-                            tlTitle7.progress(0).pause();
-                            tlTitle6.progress(0).pause();
-                            tlTitle5.progress(1).pause();
-                            tlTitle4.progress(1).pause();
-                            tlTitle3.progress(1).pause();
-                            tlTitle2.progress(1).pause();
-                            break;
-                        case 5:
-                            tlScrollLast.progress(0);
-                            tlScroll.progress(1);
-                            tl1.progress(1);
-
-                            tlTitle7.progress(0).pause();
-                            tlTitle6.progress(1).pause();
-                            tlTitle5.progress(1).pause();
-                            tlTitle4.progress(1).pause();
-                            tlTitle3.progress(1).pause();
-                            tlTitle2.progress(1).pause();
-                            break;
-                        case 6:
-                            tlScrollLast.progress(0.99);
-                            tlScroll.progress(1);
-                            tl1.progress(1);
-
-                            tlTitle7.progress(1).pause();
-                            tlTitle6.progress(1).pause();
-                            tlTitle5.progress(1).pause();
-                            tlTitle4.progress(1).pause();
-                            tlTitle3.progress(1).pause();
-                            tlTitle2.progress(1).pause();
-                            break;
-                        default:
-                            break;
-                    }
-
-                    gsap.set(sections, {xPercent: -100 * parseInt(link), ease: "none"}, 0);
-*/
-                    $('.header__menu li').removeClass('active');
-                    $('.header__menu li').eq(parseInt(link)).addClass('active');
-                    $("html, body").animate({ scrollTop: parseInt(linkData[link]) }, (Math.abs(currentScroll-parseInt(linkData[link])))/30, function (){
+                        st.scroll(parseInt(linkData[link]));
 
                         switch (link) {
                             case 0:
+                                tlScrollLast.progress(0);
+                                tlScroll.progress(0);
+                                tl7.progress(0);
+                                tl61.progress(0);
+                                tl6.progress(0);
+                                tl51.progress(0);
+                                tl5.progress(0);
+                                tl41.progress(0);
+                                tl4.progress(0);
+                                tl31.progress(0);
+                                tl3.progress(0);
+                                tl11.progress(0);
+                                tl1.progress(0);
+
                                 tlTitle7.progress(0).pause();
                                 tlTitle6.progress(0).pause();
                                 tlTitle5.progress(0).pause();
@@ -866,6 +796,20 @@ $(function (){
                                 tlTitle2.progress(0).pause();
                                 break;
                             case 1:
+                                tlScrollLast.progress(0);
+                                tlScroll.progress(0);
+                                tl7.progress(0);
+                                tl61.progress(0);
+                                tl6.progress(0);
+                                tl51.progress(0);
+                                tl5.progress(0);
+                                tl41.progress(0);
+                                tl4.progress(0);
+                                tl31.progress(0);
+                                tl3.progress(0);
+                                tl11.progress(0);
+                                tl1.progress(1);
+
                                 tlTitle7.progress(0).pause();
                                 tlTitle6.progress(0).pause();
                                 tlTitle5.progress(0).pause();
@@ -874,6 +818,20 @@ $(function (){
                                 tlTitle2.progress(1).pause();
                                 break;
                             case 2:
+                                tlScrollLast.progress(0);
+                                tlScroll.progress(0.25);
+                                tl7.progress(0);
+                                tl61.progress(0);
+                                tl6.progress(0);
+                                tl51.progress(0);
+                                tl5.progress(0);
+                                tl41.progress(0);
+                                tl4.progress(0);
+                                tl31.progress(1);
+                                tl3.progress(1);
+                                tl11.progress(1);
+                                tl1.progress(1);
+
                                 tlTitle7.progress(0).pause();
                                 tlTitle6.progress(0).pause();
                                 tlTitle5.progress(0).pause();
@@ -882,6 +840,20 @@ $(function (){
                                 tlTitle2.progress(1).pause();
                                 break;
                             case 3:
+                                tlScrollLast.progress(0);
+                                tlScroll.progress(0.5);
+                                tl7.progress(0);
+                                tl61.progress(0);
+                                tl6.progress(0);
+                                tl51.progress(0);
+                                tl5.progress(0);
+                                tl41.progress(1);
+                                tl4.progress(1);
+                                tl31.progress(1);
+                                tl3.progress(1);
+                                tl11.progress(1);
+                                tl1.progress(1);
+
                                 tlTitle7.progress(0).pause();
                                 tlTitle6.progress(0).pause();
                                 tlTitle5.progress(0).pause();
@@ -890,6 +862,20 @@ $(function (){
                                 tlTitle2.progress(1).pause();
                                 break;
                             case 4:
+                                tlScrollLast.progress(0);
+                                tlScroll.progress(0.75);
+                                tl7.progress(0);
+                                tl61.progress(0);
+                                tl6.progress(0);
+                                tl51.progress(1);
+                                tl5.progress(1);
+                                tl41.progress(1);
+                                tl4.progress(1);
+                                tl31.progress(1);
+                                tl3.progress(1);
+                                tl11.progress(1);
+                                tl1.progress(1);
+
                                 tlTitle7.progress(0).pause();
                                 tlTitle6.progress(0).pause();
                                 tlTitle5.progress(1).pause();
@@ -898,6 +884,20 @@ $(function (){
                                 tlTitle2.progress(1).pause();
                                 break;
                             case 5:
+                                tlScrollLast.progress(0);
+                                tlScroll.progress(1);
+                                tl7.progress(0);
+                                tl61.progress(0);
+                                tl6.progress(1);
+                                tl51.progress(1);
+                                tl5.progress(1);
+                                tl41.progress(1);
+                                tl4.progress(1);
+                                tl31.progress(1);
+                                tl3.progress(1);
+                                tl11.progress(1);
+                                tl1.progress(1);
+
                                 tlTitle7.progress(0).pause();
                                 tlTitle6.progress(1).pause();
                                 tlTitle5.progress(1).pause();
@@ -906,6 +906,21 @@ $(function (){
                                 tlTitle2.progress(1).pause();
                                 break;
                             case 6:
+                                tlScrollLast.progress(1);
+                                tlScroll.progress(1);
+                                tl7.progress(1);
+                                tl61.progress(1);
+                                tl6.progress(1);
+                                tl51.progress(1);
+                                tl5.progress(1);
+                                tl41.progress(1);
+                                tl4.progress(1);
+                                tl31.progress(1);
+                                tl3.progress(1);
+                                tl11.progress(1);
+                                tl1.progress(1);
+
+
                                 tlTitle7.progress(1).pause();
                                 tlTitle6.progress(1).pause();
                                 tlTitle5.progress(1).pause();
@@ -917,10 +932,16 @@ $(function (){
                             default:
                                 break;
                         }
+
+
                         gsap.set(titles, {y: "100%"});
                         gsap.set(titles[parseInt(link)], {y: "0"});
+                        gsap.set(sections, {xPercent: -100 * parseInt(link), ease: "none"}, 0);
+                        $('.header__menu li').removeClass('active');
+                        $('.header__menu li').eq(parseInt(link)).addClass('active');
+
                         skipMode = false;
-                    });
+                    }
                 });
             } else {
                 //mobile
