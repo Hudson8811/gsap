@@ -816,7 +816,7 @@ $(function (){
 */
                     $('.header__menu li').removeClass('active');
                     $('.header__menu li').eq(parseInt(link)).addClass('active');
-                    $("html, body").animate({ scrollTop: parseInt(linkData[link]) }, (Math.abs(currentScroll-parseInt(linkData[link])))/50, function (){
+                    $("html, body").animate({ scrollTop: parseInt(linkData[link]) }, (Math.abs(currentScroll-parseInt(linkData[link])))/30, function (){
 
                         switch (link) {
                             case 0:
