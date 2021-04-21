@@ -71,7 +71,6 @@ $orange-color: #b66449;
     @include mobile {
       height: vw3(375);
       background: center top / cover url(../images/blog-big_banner-bg.png) no-repeat;
-      background-attachment: fixed;
     }
 
     .blog_page-container {
