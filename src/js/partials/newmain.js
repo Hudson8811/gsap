@@ -133,6 +133,7 @@ $(function (){
                 gsap.registerPlugin(ScrollToPlugin);
 
                 let currentSlide = 0;
+                let skipMode = false;
 
                 let titles = gsap.utils.toArray(".page-title li"),
                     sections = gsap.utils.toArray(".scrollable"),
@@ -180,14 +181,10 @@ $(function (){
                 tlProjectBtn.from(".projects .content__btn-block > *", 0.3, {scale: 0, ease: Back.easeOut});
 
                 let tlTitle2 = gsap.timeline({paused: true});
-                tlTitle2.to(titles[sectionNumber], {y: "0", duration: 0.2,});
-                tlTitle2.to(titles[sectionNumber - 1], {y: "-100%", duration: 0.2,}, 0);
+                tlTitle2.fromTo(titles[sectionNumber], {y: "100%"},{y: "0", duration: 0.2,});
+                tlTitle2.fromTo(titles[sectionNumber - 1], {y: "0"}, {y: "-100%", duration: 0.2,}, 0);
 
-                gsap.set(titles, {y: "100%"});
 
-                gsap.delayedCall(0.2, function () {
-                    gsap.to(titles[0], {y: "0", duration: 0.2});
-                });
 
                 let tl1 = gsap.timeline({
                     scrollTrigger: {
@@ -210,11 +207,11 @@ $(function (){
                         },
                         onToggle: ({progress, direction, isActive}) => {
                             if (!isActive && direction > 0) {
-                                tlTitle2.play();
+                                if (!skipMode) tlTitle2.play();
                                 $('.header__menu li').removeClass('active');
                                 $('.header__menu li').eq(1).addClass('active');
                             } else if (isActive && direction < 0) {
-                                tlTitle2.reverse();
+                                if (!skipMode) tlTitle2.reverse();
                                 $('.header__menu li').removeClass('active');
                                 $('.header__menu li').eq(0).addClass('active');
                             }
@@ -342,8 +339,8 @@ $(function (){
                 tlAvardsBtn.from(".awards .content__btn-block > *", 0.3, {scale: 0, ease: Back.easeOut});
 
                 let tlTitle3 = gsap.timeline({paused: true});
-                tlTitle3.to(titles[sectionNumber], {y: "0", duration: 0.2,});
-                tlTitle3.to(titles[sectionNumber - 1], {y: "-100%", duration: 0.2,}, 0);
+                tlTitle3.fromTo(titles[sectionNumber], {y: "100%"},{y: "0", duration: 0.2,});
+                tlTitle3.fromTo(titles[sectionNumber - 1], {y: "0"}, {y: "-100%", duration: 0.2,}, 0);
 
 
                 let tl3 = gsap.timeline({
@@ -361,11 +358,11 @@ $(function (){
                         },
                         onToggle: ({progress, direction, isActive}) => {
                             if (!isActive && direction > 0) {
-                                tlTitle3.play();
+                                if (!skipMode) tlTitle3.play();
                                 $('.header__menu li').removeClass('active');
                                 $('.header__menu li').eq(2).addClass('active');
                             } else if (isActive && direction < 0) {
-                                tlTitle3.reverse();
+                                if (!skipMode) tlTitle3.reverse();
                                 $('.header__menu li').removeClass('active');
                                 $('.header__menu li').eq(1).addClass('active');
                             }
@@ -402,8 +399,8 @@ $(function (){
                 //testimonials start
                 sectionNumber++;
                 let tlTitle4 = gsap.timeline({paused: true});
-                tlTitle4.to(titles[sectionNumber], {y: "0", duration: 0.2,});
-                tlTitle4.to(titles[sectionNumber - 1], {y: "-100%", duration: 0.2,}, 0);
+                tlTitle4.fromTo(titles[sectionNumber], {y: "100%"},{y: "0", duration: 0.2,});
+                tlTitle4.fromTo(titles[sectionNumber - 1], {y: "0"}, {y: "-100%", duration: 0.2,}, 0);
 
                 let tl4 = gsap.timeline({
                     scrollTrigger: {
@@ -413,11 +410,11 @@ $(function (){
                         end: "+=" + (scrollDurationHome),
                         onToggle: ({progress, direction, isActive}) => {
                             if (!isActive && direction > 0) {
-                                tlTitle4.play();
+                                if (!skipMode) tlTitle4.play();
                                 $('.header__menu li').removeClass('active');
                                 $('.header__menu li').eq(3).addClass('active');
                             } else if (isActive && direction < 0) {
-                                tlTitle4.reverse();
+                                if (!skipMode) tlTitle4.reverse();
                                 $('.header__menu li').removeClass('active');
                                 $('.header__menu li').eq(2).addClass('active');
                             }
@@ -464,8 +461,8 @@ $(function (){
                 tlExpBtn.from(".experience .content__btn-block > *", 0.3, {scale: 0, ease: Back.easeOut});
 
                 let tlTitle5 = gsap.timeline({paused: true});
-                tlTitle5.to(titles[sectionNumber], {y: "0", duration: 0.2,});
-                tlTitle5.to(titles[sectionNumber - 1], {y: "-100%", duration: 0.2,}, 0);
+                tlTitle5.fromTo(titles[sectionNumber], {y: "100%"},{y: "0", duration: 0.2,});
+                tlTitle5.fromTo(titles[sectionNumber - 1], {y: "0"}, {y: "-100%", duration: 0.2,}, 0);
 
 
                 let tl5 = gsap.timeline({
@@ -483,11 +480,11 @@ $(function (){
                         },
                         onToggle: ({progress, direction, isActive}) => {
                             if (!isActive && direction > 0) {
-                                tlTitle5.play();
+                                if (!skipMode) tlTitle5.play();
                                 $('.header__menu li').removeClass('active');
                                 $('.header__menu li').eq(4).addClass('active');
                             } else if (isActive && direction < 0) {
-                                tlTitle5.reverse();
+                                if (!skipMode) tlTitle5.reverse();
                                 $('.header__menu li').removeClass('active');
                                 $('.header__menu li').eq(3).addClass('active');
                             }
@@ -528,8 +525,8 @@ $(function (){
                 tlNewsBtn.from(".news .content__btn-block > *", 0.3, {scale: 0, ease: Back.easeOut});
 
                 let tlTitle6 = gsap.timeline({paused: true});
-                tlTitle6.to(titles[sectionNumber], {y: "0", duration: 0.2,});
-                tlTitle6.to(titles[sectionNumber - 1], {y: "-100%", duration: 0.2,}, 0);
+                tlTitle6.fromTo(titles[sectionNumber], {y: "100%"},{y: "0", duration: 0.2,});
+                tlTitle6.fromTo(titles[sectionNumber - 1], {y: "0"}, {y: "-100%", duration: 0.2,}, 0);
 
 
                 let tl6 = gsap.timeline({
@@ -547,11 +544,11 @@ $(function (){
                         },
                         onToggle: ({progress, direction, isActive}) => {
                             if (!isActive && direction > 0) {
-                                tlTitle6.play();
+                                if (!skipMode) tlTitle6.play();
                                 $('.header__menu li').removeClass('active');
                                 $('.header__menu li').eq(5).addClass('active');
                             } else if (isActive && direction < 0) {
-                                tlTitle6.reverse();
+                                if (!skipMode) tlTitle6.reverse();
                                 $('.header__menu li').removeClass('active');
                                 $('.header__menu li').eq(4).addClass('active');
                             }
@@ -619,8 +616,8 @@ $(function (){
                 sectionNumber++;
 
                 let tlTitle7 = gsap.timeline({paused: true});
-                tlTitle7.to(titles[sectionNumber], {y: "0", duration: 0.2,});
-                tlTitle7.to(titles[sectionNumber - 1], {y: "-100%", duration: 0.2,}, 0);
+                tlTitle7.fromTo(titles[sectionNumber], {y: "100%"},{y: "0", duration: 0.2,});
+                tlTitle7.fromTo(titles[sectionNumber - 1], {y: "0"}, {y: "-100%", duration: 0.2,}, 0);
 
 
                 let tl7 = gsap.timeline({
@@ -631,11 +628,11 @@ $(function (){
                         end: "+=" + (scrollDurationHome),
                         onToggle: ({progress, direction, isActive}) => {
                             if (!isActive && direction > 0) {
-                                tlTitle7.play();
+                                if (!skipMode) tlTitle7.play();
                                 $('.header__menu li').removeClass('active');
                                 $('.header__menu li').eq(6).addClass('active');
                             } else if (isActive && direction < 0) {
-                                tlTitle7.reverse();
+                                if (!skipMode) tlTitle7.reverse();
                                 $('.header__menu li').removeClass('active');
                                 $('.header__menu li').eq(5).addClass('active');
                             }
@@ -712,13 +709,20 @@ $(function (){
                     ease: "none"
                 }, 0);
 
+                gsap.set(titles, {y: "100%"});
+
+                gsap.delayedCall(0.2, function () {
+                    gsap.to(titles[0], {y: "0", duration: 0.2});
+                });
+
 
                 $(document).on('click', '.js-scroll-link', function () {
                     event.preventDefault();
+                    skipMode = true;
                     let link = $(this).data('link'),
                         currentScroll = $('html').scrollTop();
 
-                    window.scrollTo(0, parseInt(linkData[link]));
+                    /*window.scrollTo(0, parseInt(linkData[link]));
                     switch (link) {
                         case 0:
                             tlScrollLast.progress(0);
@@ -807,13 +811,78 @@ $(function (){
                         default:
                             break;
                     }
-                    gsap.set(sections, {xPercent: -100 * parseInt(link), ease: "none"}, 0);
 
+                    gsap.set(sections, {xPercent: -100 * parseInt(link), ease: "none"}, 0);
+*/
                     $('.header__menu li').removeClass('active');
                     $('.header__menu li').eq(parseInt(link)).addClass('active');
-                    gsap.set(titles, {y: "-100%"});
-                    gsap.set(titles[parseInt(link)], {y: "0"});
-                    //$("html, body").animate({ scrollTop: parseInt(linkData[link]) }, (Math.abs(currentScroll-parseInt(linkData[link])))/2.5);
+                    $("html, body").animate({ scrollTop: parseInt(linkData[link]) }, (Math.abs(currentScroll-parseInt(linkData[link])))/50, function (){
+
+                        switch (link) {
+                            case 0:
+                                tlTitle7.progress(0).pause();
+                                tlTitle6.progress(0).pause();
+                                tlTitle5.progress(0).pause();
+                                tlTitle4.progress(0).pause();
+                                tlTitle3.progress(0).pause();
+                                tlTitle2.progress(0).pause();
+                                break;
+                            case 1:
+                                tlTitle7.progress(0).pause();
+                                tlTitle6.progress(0).pause();
+                                tlTitle5.progress(0).pause();
+                                tlTitle4.progress(0).pause();
+                                tlTitle3.progress(0).pause();
+                                tlTitle2.progress(1).pause();
+                                break;
+                            case 2:
+                                tlTitle7.progress(0).pause();
+                                tlTitle6.progress(0).pause();
+                                tlTitle5.progress(0).pause();
+                                tlTitle4.progress(0).pause();
+                                tlTitle3.progress(1).pause();
+                                tlTitle2.progress(1).pause();
+                                break;
+                            case 3:
+                                tlTitle7.progress(0).pause();
+                                tlTitle6.progress(0).pause();
+                                tlTitle5.progress(0).pause();
+                                tlTitle4.progress(1).pause();
+                                tlTitle3.progress(1).pause();
+                                tlTitle2.progress(1).pause();
+                                break;
+                            case 4:
+                                tlTitle7.progress(0).pause();
+                                tlTitle6.progress(0).pause();
+                                tlTitle5.progress(1).pause();
+                                tlTitle4.progress(1).pause();
+                                tlTitle3.progress(1).pause();
+                                tlTitle2.progress(1).pause();
+                                break;
+                            case 5:
+                                tlTitle7.progress(0).pause();
+                                tlTitle6.progress(1).pause();
+                                tlTitle5.progress(1).pause();
+                                tlTitle4.progress(1).pause();
+                                tlTitle3.progress(1).pause();
+                                tlTitle2.progress(1).pause();
+                                break;
+                            case 6:
+                                tlTitle7.progress(1).pause();
+                                tlTitle6.progress(1).pause();
+                                tlTitle5.progress(1).pause();
+                                tlTitle4.progress(1).pause();
+                                tlTitle3.progress(1).pause();
+                                tlTitle2.progress(1).pause();
+
+                                break;
+                            default:
+                                break;
+                        }
+                        gsap.set(titles, {y: "100%"});
+                        gsap.set(titles[parseInt(link)], {y: "0"});
+                        skipMode = false;
+                    });
                 });
             } else {
                 //mobile
