@@ -143,17 +143,18 @@ $(window).on('load',function (){
                 projectBlocks = gsap.utils.toArray(".projects__blocks .projects__block"),
                 newsBlocks = gsap.utils.toArray(".news__blocks .news__block");
             let scrollDurationHome = 1000,
+                addBlocksScroll = 200,
                 projectBlocksScroll = projectBlocks.length * 500,
                 newsBlocksScroll = newsBlocks.length * 500;
 
             let linkData = {
                 '0': 0,
                 '1': scrollDurationHome,
-                '2': scrollDurationHome * 2 + projectBlocksScroll,
-                '3': scrollDurationHome * 3 + projectBlocksScroll,
-                '4': scrollDurationHome * 4 + projectBlocksScroll,
-                '5': scrollDurationHome * 5 + projectBlocksScroll,
-                '6': scrollDurationHome * 6 + projectBlocksScroll + newsBlocksScroll,
+                '2': scrollDurationHome * 2 + projectBlocksScroll + addBlocksScroll,
+                '3': scrollDurationHome * 3 + projectBlocksScroll + addBlocksScroll,
+                '4': scrollDurationHome * 4 + projectBlocksScroll + addBlocksScroll,
+                '5': scrollDurationHome * 5 + projectBlocksScroll + addBlocksScroll,
+                '6': scrollDurationHome * 6 + projectBlocksScroll + newsBlocksScroll + addBlocksScroll*2,
             }
 
 
@@ -164,7 +165,7 @@ $(window).on('load',function (){
                 pin: true,
                 scrub: true,
                 start: "top top",
-                end: "+=" + (scrollDurationHome * (sections.length - 1) + projectBlocksScroll + newsBlocksScroll),
+                end: "+=" + (scrollDurationHome * (sections.length - 1) + projectBlocksScroll + newsBlocksScroll + addBlocksScroll*2),
                 onUpdate: ({progress, direction, isActive}) => {
                     let currentScroll = $('html').scrollTop();
                     Object.keys(linkData).forEach(key => {
@@ -196,12 +197,7 @@ $(window).on('load',function (){
                 trigger: "body",
                 scrub:1,
                 start: "0 -" + 0,
-                snap: {
-                    snapTo: 1,
-                    duration: {min: 0.2, max: 0.5},
-                    delay: 0.2,
-                    ease: 'none'
-                },
+                snap: 1,
                 end: "+=" + scrollDurationHome,
                 onUpdate: ({progress, direction, isActive}) => {
                     if (progress >= 0.9) {
@@ -311,7 +307,7 @@ $(window).on('load',function (){
             let st11 = ScrollTrigger.create({
                 trigger: "body",
                 scrub:1,
-                start: "0 -" + scrollDurationHome,
+                start: "0 -" + (scrollDurationHome + addBlocksScroll),
                 end: "+=" + projectBlocksScroll,
                 animation: tl11
             });
@@ -356,7 +352,7 @@ $(window).on('load',function (){
             let st3 = ScrollTrigger.create({
                 trigger: "body",
                 scrub:1,
-                start: "0 -" + (scrollDurationHome + projectBlocksScroll),
+                start: "0 -" + (scrollDurationHome + projectBlocksScroll + addBlocksScroll),
                 end: "+=" + (scrollDurationHome),
                 onUpdate: ({progress, direction, isActive}) => {
                     if (progress >= 0.9) {
@@ -392,7 +388,7 @@ $(window).on('load',function (){
             let st31 = ScrollTrigger.create({
                 trigger: "body",
                 scrub:1,
-                start: "0 -" + (scrollDurationHome + projectBlocksScroll + scrollDurationHome / 2),
+                start: "0 -" + (scrollDurationHome + projectBlocksScroll + scrollDurationHome / 2 + addBlocksScroll),
                 end: "+=" + (scrollDurationHome / 2),
                 animation: tl31
             });
@@ -414,7 +410,7 @@ $(window).on('load',function (){
             let st4 = ScrollTrigger.create({
                 trigger: "body",
                 scrub:1,
-                start: "0 -" + (scrollDurationHome * (sectionNumber - 1) + projectBlocksScroll),
+                start: "0 -" + (scrollDurationHome * (sectionNumber - 1) + projectBlocksScroll + addBlocksScroll),
                 end: "+=" + (scrollDurationHome),
                 onToggle: ({progress, direction, isActive}) => {
                     if (!isActive && direction > 0) {
@@ -448,7 +444,7 @@ $(window).on('load',function (){
             let st41 = ScrollTrigger.create({
                 trigger: "body",
                 scrub:1,
-                start: "0 -" + (scrollDurationHome * (sectionNumber - 1) + projectBlocksScroll + scrollDurationHome / 2),
+                start: "0 -" + (scrollDurationHome * (sectionNumber - 1) + projectBlocksScroll + scrollDurationHome / 2 + addBlocksScroll),
                 end: "+=" + (scrollDurationHome / 2),
                 animation: tl41
             });
@@ -477,7 +473,7 @@ $(window).on('load',function (){
             let st5 = ScrollTrigger.create({
                 trigger: "body",
                 scrub:1,
-                start: "0 -" + (scrollDurationHome * (sectionNumber - 1) + projectBlocksScroll),
+                start: "0 -" + (scrollDurationHome * (sectionNumber - 1) + projectBlocksScroll + addBlocksScroll),
                 end: "+=" + (scrollDurationHome),
                 onUpdate: ({progress, direction, isActive}) => {
                     if (progress >= 0.9) {
@@ -515,7 +511,7 @@ $(window).on('load',function (){
             let st51 = ScrollTrigger.create({
                 trigger: "body",
                 scrub:1,
-                start: "0 -" + (scrollDurationHome * (sectionNumber - 1) + projectBlocksScroll + scrollDurationHome / 2),
+                start: "0 -" + (scrollDurationHome * (sectionNumber - 1) + projectBlocksScroll + scrollDurationHome / 2 + addBlocksScroll),
                 end: "+=" + (scrollDurationHome / 2),
                 animation: tl51
             });
@@ -541,7 +537,7 @@ $(window).on('load',function (){
             let st6 = ScrollTrigger.create({
                 trigger: "body",
                 scrub:1,
-                start: "0 -" + (scrollDurationHome * (sectionNumber - 1) + projectBlocksScroll),
+                start: "0 -" + (scrollDurationHome * (sectionNumber - 1) + projectBlocksScroll + addBlocksScroll),
                 end: "+=" + (scrollDurationHome),
                 onUpdate: ({progress, direction, isActive}) => {
                     if (progress >= 0.9) {
@@ -593,7 +589,7 @@ $(window).on('load',function (){
             let st61 = ScrollTrigger.create({
                 trigger: "body",
                 scrub:1,
-                start: "0 -" + (scrollDurationHome * sectionNumber + projectBlocksScroll),
+                start: "0 -" + (scrollDurationHome * sectionNumber + projectBlocksScroll + addBlocksScroll*2),
                 end: "+=" + newsBlocksScroll,
                 animation: tl61
             });
@@ -631,7 +627,7 @@ $(window).on('load',function (){
             let st7 = ScrollTrigger.create({
                 trigger: "body",
                 scrub:1,
-                start: "0 -" + (scrollDurationHome * (sectionNumber - 1) + projectBlocksScroll + newsBlocksScroll),
+                start: "0 -" + (scrollDurationHome * (sectionNumber - 1) + projectBlocksScroll + newsBlocksScroll + addBlocksScroll*2),
                 end: "+=" + (scrollDurationHome),
                 onToggle: ({progress, direction, isActive}) => {
                     if (!isActive && direction > 0) {
@@ -667,7 +663,7 @@ $(window).on('load',function (){
             let st71 = ScrollTrigger.create({
                 trigger: "body",
                 scrub:1,
-                start: "0 -" + (scrollDurationHome * (sectionNumber - 1) + projectBlocksScroll + newsBlocksScroll + scrollDurationHome / 2),
+                start: "0 -" + (scrollDurationHome * (sectionNumber - 1) + projectBlocksScroll + newsBlocksScroll + scrollDurationHome / 2 + addBlocksScroll*2),
                 end: "+=" + (scrollDurationHome / 2),
                 animation: tl71
             });
@@ -681,14 +677,9 @@ $(window).on('load',function (){
             let stScroll = ScrollTrigger.create({
                 trigger: "body",
                 scrub:1,
-                start: "0 -" + (scrollDurationHome + projectBlocksScroll),
+                start: "0 -" + (scrollDurationHome + projectBlocksScroll + addBlocksScroll),
                 end: "+=" + (scrollDurationHome * (sections.length - 3)),
-                snap: {
-                    snapTo: 0.25,
-                    duration: {min: 0.2, max: 0.5},
-                    delay: 0.2,
-                    ease: 'none'
-                },
+                snap: 0.25,
                 onUpdate: function () {
                     blockNavigation = true;
                     $('.header__menu').addClass('blocked');
@@ -705,14 +696,9 @@ $(window).on('load',function (){
             let stScrollLast = ScrollTrigger.create({
                 trigger: "body",
                 scrub:1,
-                start: "0 -" + (scrollDurationHome * (sections.length - 2) + projectBlocksScroll + newsBlocksScroll),
+                start: "0 -" + (scrollDurationHome * (sections.length - 2) + projectBlocksScroll + newsBlocksScroll + addBlocksScroll*2),
                 end: "+=" + (scrollDurationHome),
-                snap: {
-                    snapTo: 1,
-                    duration: {min: 0.2, max: 0.5},
-                    delay: 0.2,
-                    ease: 'none'
-                },
+                snap: 1,
                 onUpdate: function () {
                     blockNavigation = true;
                     $('.header__menu').addClass('blocked');
