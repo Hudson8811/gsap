@@ -64,6 +64,11 @@ img {
 	min-height: 100%;
 	box-sizing: border-box;
 	position: relative;
+	&--home{
+		@include mobile{
+			opacity: 1 !important;
+		}
+	}
 }
 
 .noise {
@@ -85,12 +90,12 @@ img {
 		position: absolute;
 	}
 }
-/*
-::-webkit-scrollbar {
-	width: 0;
-	background: transparent;
+
+body::-webkit-scrollbar {
+	width: 5px;
+	background: $main-color;
 }
 
-::-webkit-scrollbar-thumb {
-	background: transparent;
-}*/
+body::-webkit-scrollbar-thumb {
+	background: $orange-color;
+}

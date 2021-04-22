@@ -125,11 +125,15 @@ $(function() {
 
 
 $(window).on('load',function (){
-    $('#preloader').fadeOut(2000);
+    $('#preloader').fadeOut(1500);
     if ($('.home-page').length > 0) {
         if ($(window).width() > 768 && window.orientation !== 0) {
             gsap.registerPlugin(ScrollTrigger);
             gsap.registerPlugin(ScrollToPlugin);
+
+            gsap.delayedCall(0.5, function () {
+                gsap.to('.main--home', {duration: 0.5,autoAlpha: 1},0);
+            });
 
             let currentSlide = 0;
             let skipMode = false;
@@ -205,10 +209,12 @@ $(window).on('load',function (){
                     } else {
                         tlProjectBtn.reverse();
                     }
-                    blockNavigation = true
+                    blockNavigation = true;
+                    $('.header__menu').addClass('blocked');
                 },
                 onScrubComplete: ({progress, direction, isActive}) => {
-                    blockNavigation = false
+                    blockNavigation = false;
+                    $('.header__menu').removeClass('blocked');
                 },
                 onToggle: ({progress, direction, isActive}) => {
                     if (!isActive && direction > 0) {
@@ -684,10 +690,12 @@ $(window).on('load',function (){
                     ease: 'none'
                 },
                 onUpdate: function () {
-                    blockNavigation = true
+                    blockNavigation = true;
+                    $('.header__menu').addClass('blocked');
                 },
                 onScrubComplete: ({progress, direction, isActive}) => {
-                    blockNavigation = false
+                    blockNavigation = false;
+                    $('.header__menu').removeClass('blocked');
                 },
                 animation: tlScroll
             });
@@ -706,10 +714,12 @@ $(window).on('load',function (){
                     ease: 'none'
                 },
                 onUpdate: function () {
-                    blockNavigation = true
+                    blockNavigation = true;
+                    $('.header__menu').addClass('blocked');
                 },
                 onScrubComplete: ({progress, direction, isActive}) => {
-                    blockNavigation = false
+                    blockNavigation = false;
+                    $('.header__menu').removeClass('blocked');
                 },
                 animation: tlScrollLast
             });
@@ -725,183 +735,191 @@ $(window).on('load',function (){
 
             $(document).on('click', '.js-scroll-link', function () {
                 event.preventDefault();
-                if (!blockNavigation){
+                if (!blockNavigation && !skipMode){
+                    $('.header__menu').addClass('blocked');
+                    gsap.fromTo('.home-page', {autoAlpha: 1}, {duration: 0.4,autoAlpha: 0},0);
                     skipMode = true;
                     let link = $(this).data('link'),
                         currentScroll = $('html').scrollTop();
+                    setTimeout(function (){
 
 
-                    st.scroll(parseInt(linkData[link]));
 
-                    switch (link) {
-                        case 0:
-                            tlScrollLast.progress(0);
-                            tlScroll.progress(0);
-                            tl7.progress(0);
-                            tl61.progress(0);
-                            tl6.progress(0);
-                            tl51.progress(0);
-                            tl5.progress(0);
-                            tl41.progress(0);
-                            tl4.progress(0);
-                            tl31.progress(0);
-                            tl3.progress(0);
-                            tl11.progress(0);
-                            tl1.progress(0);
+                        st.scroll(parseInt(linkData[link]));
 
-                            tlTitle7.progress(0).pause();
-                            tlTitle6.progress(0).pause();
-                            tlTitle5.progress(0).pause();
-                            tlTitle4.progress(0).pause();
-                            tlTitle3.progress(0).pause();
-                            tlTitle2.progress(0).pause();
-                            break;
-                        case 1:
-                            tlScrollLast.progress(0);
-                            tlScroll.progress(0);
-                            tl7.progress(0);
-                            tl61.progress(0);
-                            tl6.progress(0);
-                            tl51.progress(0);
-                            tl5.progress(0);
-                            tl41.progress(0);
-                            tl4.progress(0);
-                            tl31.progress(0);
-                            tl3.progress(0);
-                            tl11.progress(0);
-                            tl1.progress(1);
+                        switch (link) {
+                            case 0:
+                                tlScrollLast.progress(0);
+                                tlScroll.progress(0);
+                                tl7.progress(0);
+                                tl61.progress(0);
+                                tl6.progress(0);
+                                tl51.progress(0);
+                                tl5.progress(0);
+                                tl41.progress(0);
+                                tl4.progress(0);
+                                tl31.progress(0);
+                                tl3.progress(0);
+                                tl11.progress(0);
+                                tl1.progress(0);
 
-                            tlTitle7.progress(0).pause();
-                            tlTitle6.progress(0).pause();
-                            tlTitle5.progress(0).pause();
-                            tlTitle4.progress(0).pause();
-                            tlTitle3.progress(0).pause();
-                            tlTitle2.progress(1).pause();
-                            break;
-                        case 2:
-                            tlScrollLast.progress(0);
-                            tlScroll.progress(0.25);
-                            tl7.progress(0);
-                            tl61.progress(0);
-                            tl6.progress(0);
-                            tl51.progress(0);
-                            tl5.progress(0);
-                            tl41.progress(0);
-                            tl4.progress(0);
-                            tl31.progress(1);
-                            tl3.progress(1);
-                            tl11.progress(1);
-                            tl1.progress(1);
+                                tlTitle7.progress(0).pause();
+                                tlTitle6.progress(0).pause();
+                                tlTitle5.progress(0).pause();
+                                tlTitle4.progress(0).pause();
+                                tlTitle3.progress(0).pause();
+                                tlTitle2.progress(0).pause();
+                                break;
+                            case 1:
+                                tlScrollLast.progress(0);
+                                tlScroll.progress(0);
+                                tl7.progress(0);
+                                tl61.progress(0);
+                                tl6.progress(0);
+                                tl51.progress(0);
+                                tl5.progress(0);
+                                tl41.progress(0);
+                                tl4.progress(0);
+                                tl31.progress(0);
+                                tl3.progress(0);
+                                tl11.progress(0);
+                                tl1.progress(1);
 
-                            tlTitle7.progress(0).pause();
-                            tlTitle6.progress(0).pause();
-                            tlTitle5.progress(0).pause();
-                            tlTitle4.progress(0).pause();
-                            tlTitle3.progress(1).pause();
-                            tlTitle2.progress(1).pause();
-                            break;
-                        case 3:
-                            tlScrollLast.progress(0);
-                            tlScroll.progress(0.5);
-                            tl7.progress(0);
-                            tl61.progress(0);
-                            tl6.progress(0);
-                            tl51.progress(0);
-                            tl5.progress(0);
-                            tl41.progress(1);
-                            tl4.progress(1);
-                            tl31.progress(1);
-                            tl3.progress(1);
-                            tl11.progress(1);
-                            tl1.progress(1);
+                                tlTitle7.progress(0).pause();
+                                tlTitle6.progress(0).pause();
+                                tlTitle5.progress(0).pause();
+                                tlTitle4.progress(0).pause();
+                                tlTitle3.progress(0).pause();
+                                tlTitle2.progress(1).pause();
+                                break;
+                            case 2:
+                                tlScrollLast.progress(0);
+                                tlScroll.progress(0.25);
+                                tl7.progress(0);
+                                tl61.progress(0);
+                                tl6.progress(0);
+                                tl51.progress(0);
+                                tl5.progress(0);
+                                tl41.progress(0);
+                                tl4.progress(0);
+                                tl31.progress(1);
+                                tl3.progress(1);
+                                tl11.progress(1);
+                                tl1.progress(1);
 
-                            tlTitle7.progress(0).pause();
-                            tlTitle6.progress(0).pause();
-                            tlTitle5.progress(0).pause();
-                            tlTitle4.progress(1).pause();
-                            tlTitle3.progress(1).pause();
-                            tlTitle2.progress(1).pause();
-                            break;
-                        case 4:
-                            tlScrollLast.progress(0);
-                            tlScroll.progress(0.75);
-                            tl7.progress(0);
-                            tl61.progress(0);
-                            tl6.progress(0);
-                            tl51.progress(1);
-                            tl5.progress(1);
-                            tl41.progress(1);
-                            tl4.progress(1);
-                            tl31.progress(1);
-                            tl3.progress(1);
-                            tl11.progress(1);
-                            tl1.progress(1);
+                                tlTitle7.progress(0).pause();
+                                tlTitle6.progress(0).pause();
+                                tlTitle5.progress(0).pause();
+                                tlTitle4.progress(0).pause();
+                                tlTitle3.progress(1).pause();
+                                tlTitle2.progress(1).pause();
+                                break;
+                            case 3:
+                                tlScrollLast.progress(0);
+                                tlScroll.progress(0.5);
+                                tl7.progress(0);
+                                tl61.progress(0);
+                                tl6.progress(0);
+                                tl51.progress(0);
+                                tl5.progress(0);
+                                tl41.progress(1);
+                                tl4.progress(1);
+                                tl31.progress(1);
+                                tl3.progress(1);
+                                tl11.progress(1);
+                                tl1.progress(1);
 
-                            tlTitle7.progress(0).pause();
-                            tlTitle6.progress(0).pause();
-                            tlTitle5.progress(1).pause();
-                            tlTitle4.progress(1).pause();
-                            tlTitle3.progress(1).pause();
-                            tlTitle2.progress(1).pause();
-                            break;
-                        case 5:
-                            tlScrollLast.progress(0);
-                            tlScroll.progress(1);
-                            tl7.progress(0);
-                            tl61.progress(0);
-                            tl6.progress(1);
-                            tl51.progress(1);
-                            tl5.progress(1);
-                            tl41.progress(1);
-                            tl4.progress(1);
-                            tl31.progress(1);
-                            tl3.progress(1);
-                            tl11.progress(1);
-                            tl1.progress(1);
+                                tlTitle7.progress(0).pause();
+                                tlTitle6.progress(0).pause();
+                                tlTitle5.progress(0).pause();
+                                tlTitle4.progress(1).pause();
+                                tlTitle3.progress(1).pause();
+                                tlTitle2.progress(1).pause();
+                                break;
+                            case 4:
+                                tlScrollLast.progress(0);
+                                tlScroll.progress(0.75);
+                                tl7.progress(0);
+                                tl61.progress(0);
+                                tl6.progress(0);
+                                tl51.progress(1);
+                                tl5.progress(1);
+                                tl41.progress(1);
+                                tl4.progress(1);
+                                tl31.progress(1);
+                                tl3.progress(1);
+                                tl11.progress(1);
+                                tl1.progress(1);
 
-                            tlTitle7.progress(0).pause();
-                            tlTitle6.progress(1).pause();
-                            tlTitle5.progress(1).pause();
-                            tlTitle4.progress(1).pause();
-                            tlTitle3.progress(1).pause();
-                            tlTitle2.progress(1).pause();
-                            break;
-                        case 6:
-                            tlScrollLast.progress(1);
-                            tlScroll.progress(1);
-                            tl7.progress(1);
-                            tl61.progress(1);
-                            tl6.progress(1);
-                            tl51.progress(1);
-                            tl5.progress(1);
-                            tl41.progress(1);
-                            tl4.progress(1);
-                            tl31.progress(1);
-                            tl3.progress(1);
-                            tl11.progress(1);
-                            tl1.progress(1);
+                                tlTitle7.progress(0).pause();
+                                tlTitle6.progress(0).pause();
+                                tlTitle5.progress(1).pause();
+                                tlTitle4.progress(1).pause();
+                                tlTitle3.progress(1).pause();
+                                tlTitle2.progress(1).pause();
+                                break;
+                            case 5:
+                                tlScrollLast.progress(0);
+                                tlScroll.progress(1);
+                                tl7.progress(0);
+                                tl61.progress(0);
+                                tl6.progress(1);
+                                tl51.progress(1);
+                                tl5.progress(1);
+                                tl41.progress(1);
+                                tl4.progress(1);
+                                tl31.progress(1);
+                                tl3.progress(1);
+                                tl11.progress(1);
+                                tl1.progress(1);
 
-
-                            tlTitle7.progress(1).pause();
-                            tlTitle6.progress(1).pause();
-                            tlTitle5.progress(1).pause();
-                            tlTitle4.progress(1).pause();
-                            tlTitle3.progress(1).pause();
-                            tlTitle2.progress(1).pause();
-
-                            break;
-                        default:
-                            break;
-                    }
+                                tlTitle7.progress(0).pause();
+                                tlTitle6.progress(1).pause();
+                                tlTitle5.progress(1).pause();
+                                tlTitle4.progress(1).pause();
+                                tlTitle3.progress(1).pause();
+                                tlTitle2.progress(1).pause();
+                                break;
+                            case 6:
+                                tlScrollLast.progress(1);
+                                tlScroll.progress(1);
+                                tl7.progress(1);
+                                tl61.progress(1);
+                                tl6.progress(1);
+                                tl51.progress(1);
+                                tl5.progress(1);
+                                tl41.progress(1);
+                                tl4.progress(1);
+                                tl31.progress(1);
+                                tl3.progress(1);
+                                tl11.progress(1);
+                                tl1.progress(1);
 
 
-                    gsap.set(titles, {y: "100%"});
-                    gsap.set(titles[parseInt(link)], {y: "0"});
-                    gsap.set(sections, {xPercent: -100 * parseInt(link), ease: "none"}, 0);
-                    $('.header__menu li').removeClass('active');
-                    $('.header__menu li').eq(parseInt(link)).addClass('active');
+                                tlTitle7.progress(1).pause();
+                                tlTitle6.progress(1).pause();
+                                tlTitle5.progress(1).pause();
+                                tlTitle4.progress(1).pause();
+                                tlTitle3.progress(1).pause();
+                                tlTitle2.progress(1).pause();
 
-                    skipMode = false;
+                                break;
+                            default:
+                                break;
+                        }
+
+                        gsap.set(titles, {y: "100%"});
+                        gsap.set(titles[parseInt(link)], {y: "0"});
+                        gsap.set(sections, {xPercent: -100 * parseInt(link), ease: "none"}, 0);
+                        $('.header__menu li').removeClass('active');
+                        $('.header__menu li').eq(parseInt(link)).addClass('active');
+
+                        gsap.fromTo('.home-page', {autoAlpha: 0}, {duration: 0.5,autoAlpha: 1},0);
+                        setTimeout(function (){
+                            skipMode = false;
+                            $('.header__menu').removeClass('blocked');
+                        },500);
+                    },500);
                 }
             });
         } else {
@@ -916,7 +934,6 @@ $(window).on('load',function (){
             });
         }
     }
-
 });
 
 $(function (){

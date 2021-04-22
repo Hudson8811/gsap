@@ -81,9 +81,9 @@ gulp.task('js:build', function () {
 	return gulp.src(path.src.js)
 		.pipe(plumber())
 		.pipe(rigger())
-		//.pipe(sourcemaps.init())
-		//.pipe(uglify())
-		//.pipe(sourcemaps.write())
+		.pipe(sourcemaps.init())
+		.pipe(uglify())
+		.pipe(sourcemaps.write('./maps'))
 		.pipe(gulp.dest(path.build.js))
 		.pipe(reload({stream: true}));
 });

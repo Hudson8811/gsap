@@ -109,6 +109,14 @@
         }
       }
     }
+    &.blocked{
+      li{
+        a{
+          cursor: default;
+          pointer-events: none;
+        }
+      }
+    }
   }
   &__phone{
     text-align: right;
