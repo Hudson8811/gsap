@@ -36,12 +36,12 @@
 /* my scripts */
 
 // partials/main.js
-//Скорость скролла анимации
-var hSpeed = 100,       //Скорость горизонтального скролла в процентах. Больше = медленее
-    vSpeed = 100,       //Скорость скролла вертикальных блоков (новости, проекты) в процентах. Больше = медленее
-    scrubPower = 100,   //Время/сила действия плавной остановки после скролла. 100 = 1 секунда. Больше = дольше
-    snapMode = 1,       //Доскроливание до границ блока. 1 = вкл. 0 - выкл
-    noiseMode = 1;       //Шум на фоне. 1 = вкл. 0 - выкл
+//Animation settings
+var hSpeed = 100,       // Horizontal scrolling speed in percent. More = slower
+    vSpeed = 100,       // Scrolling speed of vertical blocks (news, projects) as a percentage. More = slower
+    scrubPower = 100,   // Time / strength of action of smooth stop after scrolling. 100 = 1 second. More = longer
+    snapMode = 1,       // Scrolling to block boundaries. 1 = on / 0 - off
+    noiseMode = 1;       //Background noise. 1 = on / 0 - off
 
 
 
@@ -64,13 +64,10 @@ if($('.main').hasClass('blog_page')){
 
 			if (!header.hasClass('is-fixed')) {
 				header.css({'top': -headerHeight + 'px', 'transform': 'translateY(' + headerHeight + 'px)'}).addClass('is-fixed');
-
-				
 			}
 		} else {
 			isScroll = false;
 			header.removeClass(classes + ' is-fixed').removeAttr('style');
-			
 		}
 	});
     
@@ -572,7 +569,6 @@ $(window).on('load',function (){
             });
             //experience end
 
-
             //news start
             sectionNumber++;
 
@@ -582,7 +578,6 @@ $(window).on('load',function (){
             let tlTitle6 = gsap.timeline({paused: true});
             tlTitle6.fromTo(titles[sectionNumber], {y: "100%"},{y: "0", duration: 0.2,});
             tlTitle6.fromTo(titles[sectionNumber - 1], {y: "0"}, {y: "-100%", duration: 0.2,}, 0);
-
 
             let tl6 = gsap.timeline();
             let st6 = ScrollTrigger.create({
@@ -662,7 +657,6 @@ $(window).on('load',function (){
 
                 }
             }, 0);
-
             //news end
 
 
@@ -975,7 +969,6 @@ $(window).on('load',function (){
 
 $(function (){
     if ($('.home-page').length > 0){
-        var slideDelay = 1.5;
         var slideDuration = 0.3;
 
         var slides = document.querySelectorAll(".slide");
@@ -992,7 +985,6 @@ $(function (){
         }
 
         var wrap = wrapPartial(-100, (numSlides - 1) * 100);
-        //var timer = TweenLite.delayedCall(slideDelay, autoPlay);
 
         var animation = TweenMax.to(slides, 1, {
             xPercent: "-=" + (numSlides * 100),
@@ -1012,7 +1004,6 @@ $(function (){
         var wrapWidth = 0;
         resize();
 
-
         window.addEventListener("resize", resize);
 
         prevButton.addEventListener("click", function() {
@@ -1023,21 +1014,10 @@ $(function (){
             animateSlides(1);
         });
 
-        function updateDraggable() {
-            //timer.restart(true);
-            slideAnimation.kill();
-            this.update();
-        }
-
         function animateSlides(direction) {
-            //timer.restart(true);
             slideAnimation.kill();
             var x = snapX(gsap.getProperty(proxy,'x') + direction * slideWidth);
             slideAnimation = gsap.to(proxy, {duration: slideDuration, x: x,onUpdate: updateProgress});
-        }
-
-        function autoPlay() {
-
         }
 
         function updateProgress() {
@@ -1049,9 +1029,7 @@ $(function (){
         }
 
         function resize() {
-
             var norm = (gsap.getProperty(proxy,'x') / wrapWidth) || 0;
-
             slideWidth = slides[0].offsetWidth;
             wrapWidth = slideWidth * numSlides;
 
