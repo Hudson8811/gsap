@@ -1,3 +1,14 @@
+//Скорость скролла анимации
+var hSpeed = 100,       //Скорость горизонтального скролла в процентах. Больше = медленее
+    vSpeed = 100,       //Скорость скролла вертикальных блоков (новости, проекты) в процентах. Больше = медленее
+    scrubPower = 100,   //Время/сила действия плавной остановки после скролла. 100 = 1 секунда. Больше = дольше
+    snapMode = 1,       //Доскроливание до границ блока. 1 = вкл. 0 - выкл
+    noiseMode = 1;       //Шум на фоне. 1 = вкл. 0 - выкл
+
+
+
+
+
 if($('.main').hasClass('blog_page')){
     var header = $('.header');
 	var classes = 'active';
@@ -120,7 +131,9 @@ $(function() {
         })();
     };
 
-    noise();
+    if (noiseMode !== 0){
+        noise();
+    }
 });
 
 
@@ -142,10 +155,10 @@ $(window).on('load',function (){
                 sections = gsap.utils.toArray(".scrollable"),
                 projectBlocks = gsap.utils.toArray(".projects__blocks .projects__block"),
                 newsBlocks = gsap.utils.toArray(".news__blocks .news__block");
-            let scrollDurationHome = 1000,
+            let scrollDurationHome = 1000*(parseInt(hSpeed)/100),
                 addBlocksScroll = 200,
-                projectBlocksScroll = projectBlocks.length * 500,
-                newsBlocksScroll = newsBlocks.length * 500;
+                projectBlocksScroll = projectBlocks.length * 500*(parseInt(vSpeed)/100),
+                newsBlocksScroll = newsBlocks.length * 500*(parseInt(vSpeed)/100);
 
             let linkData = {
                 '0': 0,
@@ -195,9 +208,9 @@ $(window).on('load',function (){
             let tl1 = gsap.timeline();
             let st1 = ScrollTrigger.create({
                 trigger: "body",
-                scrub:1,
+                scrub: parseInt(scrubPower)/100,
                 start: "0 -" + 0,
-                snap: 1,
+                snap: parseInt(snapMode),
                 end: "+=" + scrollDurationHome,
                 onUpdate: ({progress, direction, isActive}) => {
                     if (progress >= 0.9) {
@@ -306,7 +319,7 @@ $(window).on('load',function (){
             let tl11 = gsap.timeline();
             let st11 = ScrollTrigger.create({
                 trigger: "body",
-                scrub:1,
+                scrub:parseInt(scrubPower)/100,
                 start: "0 -" + (scrollDurationHome + addBlocksScroll),
                 end: "+=" + projectBlocksScroll,
                 animation: tl11
@@ -351,7 +364,7 @@ $(window).on('load',function (){
             let tl3 = gsap.timeline();
             let st3 = ScrollTrigger.create({
                 trigger: "body",
-                scrub:1,
+                scrub:parseInt(scrubPower)/100,
                 start: "0 -" + (scrollDurationHome + projectBlocksScroll + addBlocksScroll),
                 end: "+=" + (scrollDurationHome),
                 onUpdate: ({progress, direction, isActive}) => {
@@ -387,7 +400,7 @@ $(window).on('load',function (){
             let tl31 = gsap.timeline();
             let st31 = ScrollTrigger.create({
                 trigger: "body",
-                scrub:1,
+                scrub:parseInt(scrubPower)/100,
                 start: "0 -" + (scrollDurationHome + projectBlocksScroll + scrollDurationHome / 2 + addBlocksScroll),
                 end: "+=" + (scrollDurationHome / 2),
                 animation: tl31
@@ -409,7 +422,7 @@ $(window).on('load',function (){
             let tl4 = gsap.timeline();
             let st4 = ScrollTrigger.create({
                 trigger: "body",
-                scrub:1,
+                scrub:parseInt(scrubPower)/100,
                 start: "0 -" + (scrollDurationHome * (sectionNumber - 1) + projectBlocksScroll + addBlocksScroll),
                 end: "+=" + (scrollDurationHome),
                 onToggle: ({progress, direction, isActive}) => {
@@ -443,7 +456,7 @@ $(window).on('load',function (){
             let tl41 = gsap.timeline();
             let st41 = ScrollTrigger.create({
                 trigger: "body",
-                scrub:1,
+                scrub:parseInt(scrubPower)/100,
                 start: "0 -" + (scrollDurationHome * (sectionNumber - 1) + projectBlocksScroll + scrollDurationHome / 2 + addBlocksScroll),
                 end: "+=" + (scrollDurationHome / 2),
                 animation: tl41
@@ -472,7 +485,7 @@ $(window).on('load',function (){
             let tl5 = gsap.timeline();
             let st5 = ScrollTrigger.create({
                 trigger: "body",
-                scrub:1,
+                scrub:parseInt(scrubPower)/100,
                 start: "0 -" + (scrollDurationHome * (sectionNumber - 1) + projectBlocksScroll + addBlocksScroll),
                 end: "+=" + (scrollDurationHome),
                 onUpdate: ({progress, direction, isActive}) => {
@@ -510,7 +523,7 @@ $(window).on('load',function (){
             let tl51 = gsap.timeline();
             let st51 = ScrollTrigger.create({
                 trigger: "body",
-                scrub:1,
+                scrub:parseInt(scrubPower)/100,
                 start: "0 -" + (scrollDurationHome * (sectionNumber - 1) + projectBlocksScroll + scrollDurationHome / 2 + addBlocksScroll),
                 end: "+=" + (scrollDurationHome / 2),
                 animation: tl51
@@ -536,7 +549,7 @@ $(window).on('load',function (){
             let tl6 = gsap.timeline();
             let st6 = ScrollTrigger.create({
                 trigger: "body",
-                scrub:1,
+                scrub:parseInt(scrubPower)/100,
                 start: "0 -" + (scrollDurationHome * (sectionNumber - 1) + projectBlocksScroll + addBlocksScroll),
                 end: "+=" + (scrollDurationHome),
                 onUpdate: ({progress, direction, isActive}) => {
@@ -588,7 +601,7 @@ $(window).on('load',function (){
             let tl61 = gsap.timeline();
             let st61 = ScrollTrigger.create({
                 trigger: "body",
-                scrub:1,
+                scrub:parseInt(scrubPower)/100,
                 start: "0 -" + (scrollDurationHome * sectionNumber + projectBlocksScroll + addBlocksScroll*2),
                 end: "+=" + newsBlocksScroll,
                 animation: tl61
@@ -626,7 +639,7 @@ $(window).on('load',function (){
             let tl7 = gsap.timeline();
             let st7 = ScrollTrigger.create({
                 trigger: "body",
-                scrub:1,
+                scrub:parseInt(scrubPower)/100,
                 start: "0 -" + (scrollDurationHome * (sectionNumber - 1) + projectBlocksScroll + newsBlocksScroll + addBlocksScroll*2),
                 end: "+=" + (scrollDurationHome),
                 onToggle: ({progress, direction, isActive}) => {
@@ -662,7 +675,7 @@ $(window).on('load',function (){
             let tl71 = gsap.timeline();
             let st71 = ScrollTrigger.create({
                 trigger: "body",
-                scrub:1,
+                scrub:parseInt(scrubPower)/100,
                 start: "0 -" + (scrollDurationHome * (sectionNumber - 1) + projectBlocksScroll + newsBlocksScroll + scrollDurationHome / 2 + addBlocksScroll*2),
                 end: "+=" + (scrollDurationHome / 2),
                 animation: tl71
@@ -676,10 +689,10 @@ $(window).on('load',function (){
             let tlScroll = gsap.timeline();
             let stScroll = ScrollTrigger.create({
                 trigger: "body",
-                scrub:1,
+                scrub:parseInt(scrubPower)/100,
                 start: "0 -" + (scrollDurationHome + projectBlocksScroll + addBlocksScroll),
                 end: "+=" + (scrollDurationHome * (sections.length - 3)),
-                snap: 0.25,
+                snap: 0.25*parseInt(snapMode),
                 onUpdate: function () {
                     blockNavigation = true;
                     $('.header__menu').addClass('blocked');
@@ -695,10 +708,10 @@ $(window).on('load',function (){
             let tlScrollLast = gsap.timeline();
             let stScrollLast = ScrollTrigger.create({
                 trigger: "body",
-                scrub:1,
+                scrub:parseInt(scrubPower)/100,
                 start: "0 -" + (scrollDurationHome * (sections.length - 2) + projectBlocksScroll + newsBlocksScroll + addBlocksScroll*2),
                 end: "+=" + (scrollDurationHome),
-                snap: 1,
+                snap: parseInt(snapMode),
                 onUpdate: function () {
                     blockNavigation = true;
                     $('.header__menu').addClass('blocked');
