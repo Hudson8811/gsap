@@ -1,0 +1,133 @@
+.header{
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  border-bottom: 1px solid rgba(230, 227, 217, 0.3);
+  height: vw2(89);
+  left: 0;
+  position: fixed;
+  top: 0;
+  z-index: 2;
+  @include mobile{
+    height: vw3(70);
+    background: #1C1C1C;
+    background: rgba(36,31,31,1);
+    z-index: 100;
+  }
+  &__left{
+    width: 36.927vw;
+    box-sizing: border-box;
+    border-right: 1px solid rgba(230, 227, 217, 0.3);
+    display: flex;
+    flex-shrink: 0;
+    @include mobile{
+      width: 60%;
+      border-right: 0;
+    }
+  }
+  &__right{
+    width: calc(100% - 36.927vw);
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-right: vw2(32);
+    @include mobile{
+      width: 40%;
+      padding-right: vw3(20);
+    }
+  }
+
+  &__letter{
+    width: vw2(82);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: vw2(38);
+    text-align: center;
+    flex-shrink: 0;
+    box-sizing: border-box;
+    border-right: 1px solid rgba(230, 227, 217, 0.3);
+    @include mobile{
+      width: auto;
+      padding-left: vw3(20);
+      font-size: vw3(28);
+      padding-right: vw3(20);
+    }
+  }
+  &__socials{
+    padding: 0 vw2(32);
+    display: flex;
+    align-items: center;
+    @include mobile{
+      padding: 0 vw3(20);
+    }
+    a{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: vw2(19);
+      height: vw2(20);
+      @include mobile{
+        width: vw3(20);
+        height: vw3(20);
+      }
+      +a{
+        margin-left: vw2(32);
+        @include mobile{
+          margin-left: vw3(20);
+        }
+      }
+      svg{
+        display: block;
+        max-width: 100%;
+        max-height: 100%;
+        object-fit: contain;
+        object-position: center center;
+      }
+    }
+  }
+  &__menu{
+    list-style: none;
+    display: flex;
+    align-items: center;
+    @include mobile{
+      display: none;
+    }
+    li{
+      display: block;
+      padding: 0 vw2(32);
+      text-transform: uppercase;
+      a{
+        font-size: vw2(14);
+        line-height: 140%;
+        display: block;
+      }
+      &.active{
+        a{
+          color: $orange-color;
+        }
+      }
+    }
+    &.blocked{
+      li{
+        a{
+          cursor: default;
+          pointer-events: none;
+        }
+      }
+    }
+  }
+  &__phone{
+    text-align: right;
+    a{
+      font-size: vw2(15);
+      line-height: 130%;
+      display: block;
+      @include mobile{
+        font-size: vw3(15);
+        text-align: right;
+      }
+    }
+  }
+}

@@ -1,4 +1,6 @@
-@function vw($px) {
+/* 3.1 Blog page */
+
+@function vw2($px) {
   @return (($px/1050) * 100) + vh;
 }
 @function vw2($px) {
@@ -537,8 +539,8 @@ $orange-color: #b66449;
     &-placeholder {
       height: 100%;
       width: 100%;
-      font-size: vw(18);
-      line-height: vw(50);
+      font-size: vw2(18);
+      line-height: vw2(50);
       opacity: 0.5;
       text-transform: uppercase;
       pointer-events: none;
@@ -555,7 +557,7 @@ $orange-color: #b66449;
     }
 
     &-input {
-      height: vw(50);
+      height: vw2(50);
       box-sizing: border-box;
       position: relative;
       display: block;
@@ -564,7 +566,7 @@ $orange-color: #b66449;
         height: vw3(50);
       }
       + .content__form-input {
-        margin-top: vw(56);
+        margin-top: vw2(56);
         @include mobile {
           margin-top: vw3(20);
         }
@@ -580,8 +582,8 @@ $orange-color: #b66449;
         color: inherit;
         border: none;
         border-bottom: 1px solid #e2dcc8;
-        font-size: vw(18);
-        line-height: vw(35);
+        font-size: vw2(18);
+        line-height: vw2(35);
         @include mobile {
           font-size: vw3(18);
           line-height: vw3(35);
@@ -590,9 +592,9 @@ $orange-color: #b66449;
         &:focus {
           outline: none;
           + .content__form-placeholder {
-            font-size: vw(13);
-            line-height: vw(13);
-            top: vw(-6);
+            font-size: vw2(13);
+            line-height: vw2(13);
+            top: vw2(-6);
             @include mobile {
               font-size: vw3(13);
               line-height: vw3(13);
@@ -603,7 +605,7 @@ $orange-color: #b66449;
       }
     }
     &-btn {
-      margin-top: vw(78);
+      margin-top: vw2(78);
       @include mobile {
         margin-top: vw3(30);
       }

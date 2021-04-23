@@ -23,7 +23,6 @@ body{
 	-webkit-locale: auto;
 	font-family: $font;
 	color: $main-color;
-
 	background: #1C1C1C;
 	background: linear-gradient(to right, rgba(36,31,31,1) 0%, rgba(36,31,31,1) 32%, rgba(74,71,70,1) 100%);
 }
@@ -59,6 +58,16 @@ img {
 }
 
 
+
+body::-webkit-scrollbar {
+	width: 5px;
+	background: $main-color;
+}
+
+body::-webkit-scrollbar-thumb {
+	background: $orange-color;
+}
+
 .main{
 	width: 100%;
 	min-height: 100%;
@@ -79,11 +88,7 @@ img {
 	width: 100vw;
 	height: 100vh;
 	pointer-events: none;
-	//opacity: 1;
 	opacity: .15;
-	/*background: #1C1C1C url("../images/noise.png") center center no-repeat;
-	background-size: cover;*/
-
 	&--inner{
 		width: 100%;
 		height: 100%;
@@ -91,11 +96,76 @@ img {
 	}
 }
 
-body::-webkit-scrollbar {
-	width: 5px;
-	background: $main-color;
+
+.btn{
+	border: none;
+	color:$main-color;
+	cursor: pointer;
+	display: inline-block;
+	border-radius: 70px;
+	background: $orange-color;
+	transition: background 0.3s;
+	font-size: vw2(18);
+	line-height: 130%;
+	text-transform: uppercase;
+	text-align: center;
+	padding: vw2(14) vw2(60);
+	@include mobile{
+		border-radius: vw3(50);
+		font-size: vw3(18);
+		padding: vw3(14) vw3(60);
+	}
+	&:hover{
+		background: $main-color;
+		color: $orange-color;
+	}
+	svg{
+		max-width: vw2(36);
+		max-height: vw2(16);
+		display: block;
+		object-fit: contain;
+		object-position: center;
+		@include mobile{
+			max-width: vw3(36);
+			max-height: vw3(16);
+		}
+	}
+	&--arrow{
+		padding: vw2(26) vw2(36);
+		@include mobile{
+			padding: vw3(26) vw3(36);
+		}
+	}
+	&--invert{
+		background: transparent;
+		border: 1px solid $main-color;
+	}
 }
 
-body::-webkit-scrollbar-thumb {
-	background: $orange-color;
+.h1{
+	font-weight: 500;
+	font-size: vw2(76);
+	line-height: 0.91;
+	text-transform: uppercase;
+	@include mobile{
+		font-size: vw3(44);
+	}
+}
+
+.small{
+	font-size: vw2(15);
+	line-height: 130%;
+	@include mobile{
+		font-size: vw3(15);
+	}
+}
+
+.input-file{
+	input{
+		display: none;
+	}
+	span{
+		cursor: pointer;
+		text-decoration: underline;
+	}
 }

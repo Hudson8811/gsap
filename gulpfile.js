@@ -82,7 +82,7 @@ gulp.task('js:build', function () {
 		.pipe(plumber())
 		.pipe(rigger())
 		.pipe(sourcemaps.init())
-		.pipe(uglify())
+		//.pipe(uglify())
 		.pipe(sourcemaps.write('./maps'))
 		.pipe(gulp.dest(path.build.js))
 		.pipe(reload({stream: true}));
@@ -97,7 +97,7 @@ gulp.task('style:build', function () {
 		.pipe(autoprefixer({
 			browsers: ['last 2 versions']
 		}))
-		.pipe(cleanCSS({rebase: false}))
+		//.pipe(cleanCSS({rebase: false}))
 		.pipe(sourcemaps.write('./maps'))
 		.pipe(gulp.dest(path.build.css))
 		.pipe(reload({stream: true}));

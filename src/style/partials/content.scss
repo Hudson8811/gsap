@@ -1,138 +1,3 @@
-.header{
-  width: 100%;
-  box-sizing: border-box;
-  display: flex;
-  border-bottom: 1px solid rgba(230, 227, 217, 0.3);
-  height: vw(89);
-  left: 0;
-  position: fixed;
-  top: 0;
-  z-index: 2;
-  @include mobile{
-    height: vw3(70);
-    background: #1C1C1C;
-    background: rgba(36,31,31,1);
-    z-index: 100;
-  }
-  &__left{
-    width: 36.927vw;
-    box-sizing: border-box;
-    border-right: 1px solid rgba(230, 227, 217, 0.3);
-    display: flex;
-    flex-shrink: 0;
-    @include mobile{
-      width: 60%;
-      border-right: 0;
-    }
-  }
-  &__right{
-    width: calc(100% - 36.927vw);
-    box-sizing: border-box;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding-right: vw2(32);
-    @include mobile{
-      width: 40%;
-      padding-right: vw3(20);
-    }
-  }
-
-  &__letter{
-    width: vw(82);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: vw(38);
-    text-align: center;
-    flex-shrink: 0;
-    box-sizing: border-box;
-    border-right: 1px solid rgba(230, 227, 217, 0.3);
-    @include mobile{
-      width: auto;
-      padding-left: vw3(20);
-      font-size: vw3(28);
-      padding-right: vw3(20);
-    }
-  }
-  &__socials{
-    padding: 0 vw2(32);
-    display: flex;
-    align-items: center;
-    @include mobile{
-      padding: 0 vw3(20);
-    }
-    a{
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: vw2(19);
-      height: vw(20);
-      @include mobile{
-        width: vw3(20);
-        height: vw3(20);
-      }
-      +a{
-        margin-left: vw2(32);
-        @include mobile{
-          margin-left: vw3(20);
-        }
-      }
-      svg{
-        display: block;
-        max-width: 100%;
-        max-height: 100%;
-        object-fit: contain;
-        object-position: center center;
-      }
-    }
-  }
-  &__menu{
-    list-style: none;
-    display: flex;
-    align-items: center;
-    @include mobile{
-      display: none;
-    }
-    li{
-      display: block;
-      padding: 0 vw2(32);
-      text-transform: uppercase;
-      a{
-        font-size: vw2(14);
-        line-height: 140%;
-        display: block;
-      }
-      &.active{
-        a{
-          color: $orange-color;
-        }
-      }
-    }
-    &.blocked{
-      li{
-        a{
-          cursor: default;
-          pointer-events: none;
-        }
-      }
-    }
-  }
-  &__phone{
-    text-align: right;
-    a{
-      font-size: vw2(15);
-      line-height: 130%;
-      display: block;
-      @include mobile{
-        font-size: vw3(15);
-        text-align: right;
-      }
-    }
-  }
-}
-
-
 .scroll {
   z-index: 1;
   position: fixed;
@@ -146,7 +11,7 @@
 .page-title,
 .sticky-title {
   overflow: hidden;
-  width: vw(82);
+  width: vw2(82);
   height: 100%;
   position: fixed;
   flex-shrink: 0;
@@ -173,13 +38,13 @@
   ul{
     text-transform: uppercase;
     width: 100vh;
-    font-size: vw(38);
+    font-size: vw2(38);
     position: absolute;
     bottom: 0;
     left: 0;
-    height: vw(82);
+    height: vw2(82);
     transform-origin: 0 100%;
-    transform: rotate(-90deg) translateY(100%) translateX(vw(89));
+    transform: rotate(-90deg) translateY(100%) translateX(vw2(89));
     white-space: nowrap;
     z-index: 1;
     @include mobile{
@@ -191,7 +56,7 @@
     }
     li{
       position: absolute;
-      padding: 0 vw(128) 0 vw(35);
+      padding: 0 vw2(128) 0 vw2(35);
       overflow: hidden;
       display: flex;
       justify-content: space-between;
@@ -206,7 +71,6 @@
     }
   }
 }
-
 .page-title{
   background: #1C1C1C;
   background: rgba(36,31,31,1);
@@ -219,7 +83,6 @@
     }
   }
 }
-
 .sticky-title {
   transform: translateX(0) !important;
   letter-spacing: 0.02em;
@@ -242,75 +105,11 @@
   }
 }
 
-
-.btn{
-  border: none;
-  color:$main-color;
-  cursor: pointer;
-  display: inline-block;
-  border-radius: 70px;
-  background: $orange-color;
-  transition: background 0.3s;
-  font-size: vw(18);
-  line-height: 130%;
-  text-transform: uppercase;
-  text-align: center;
-  padding: vw(14) vw2(60);
-  @include mobile{
-    border-radius: vw3(50);
-    font-size: vw3(18);
-    padding: vw3(14) vw3(60);
-  }
-  &:hover{
-    background: $main-color;
-    color: $orange-color;
-  }
-  svg{
-    max-width: vw2(36);
-    max-height: vw(16);
-    display: block;
-    object-fit: contain;
-    object-position: center;
-    @include mobile{
-      max-width: vw3(36);
-      max-height: vw3(16);
-    }
-  }
-  &--arrow{
-    padding: vw(26) vw2(36);
-    @include mobile{
-      padding: vw3(26) vw3(36);
-    }
-  }
-  &--invert{
-    background: transparent;
-    border: 1px solid $main-color;
-  }
-}
-
-.h1{
-  font-weight: 500;
-  font-size: vw2(76);
-  line-height: 0.85;
-  text-transform: uppercase;
-  @include mobile{
-    font-size: vw3(44);
-  }
-}
-
-.small{
-  font-size: vw2(15);
-  line-height: 130%;
-  @include mobile{
-    font-size: vw3(15);
-  }
-}
-
 .home-page {
   height: 100vh;
   top: 0;
   left: 0;
-  padding-top: vw(89);
+  padding-top: vw2(89);
   display: flex;
   @include mobile{
     height: auto;
@@ -342,7 +141,7 @@
   .content{
     width: 100vw;
     height: 100%;
-    padding-left: vw(82);
+    padding-left: vw2(82);
     box-sizing: border-box;
     display: flex;
     position: relative;
@@ -355,7 +154,7 @@
     &__bg{
       position: absolute;
       z-index: -2;
-      width: calc(100% - 7.80952vh);
+      width: calc(100% - 4.27083vw);
       height: 100%;
       background-size: cover;
       right: 0;
@@ -378,11 +177,11 @@
       }
     }
     &__left{
-      width: calc(36.927vw - 7.80952vh);
+      width: calc(36.927vw - 4.27083vw);
       border-right: 1px solid rgba(230, 227, 217, 0.3);
       flex-shrink: 0;
       box-sizing: border-box;
-      padding: vw(22) vw2(40) vw(22) vw2(22);
+      padding: vw2(22) vw2(40) vw2(22) vw2(22);
       display: flex;
       flex-direction: column;
       overflow: hidden;
@@ -394,8 +193,8 @@
       }
     }
     &__right{
-      width: calc(100% - (36.927vw - 7.80952vh));
-      padding: vw(22) vw2(22);
+      width: calc(100% - (36.927vw - 4.27083vw));
+      padding: vw2(22) vw2(22);
       box-sizing: border-box;
       position: relative;
       overflow: hidden;
@@ -411,7 +210,7 @@
       }
     }
     &__description{
-      margin-top: vw(48);
+      margin-top: vw2(48);
       max-width: vw2(380);
       position: relative;
       @include mobile{
@@ -419,7 +218,7 @@
         margin-top: vw3(30);
       }
       +.content__btn-block{
-        margin-top: vw(105);
+        margin-top: vw2(105);
         @include mobile{
           margin-top: vw3(40);
         }
@@ -430,7 +229,7 @@
         display: flex;
         align-items: center;
         justify-content: flex-end;
-        margin-top: vw(75);
+        margin-top: vw2(75);
         position: relative;
         @include mobile{
           margin-top: vw3(40);
@@ -450,16 +249,16 @@
 
     &__menu{
       list-style: none;
-      margin-top: vw(131);
+      margin-top: vw2(131);
       margin-left: vw2(-22);
       margin-right: vw2(-40);
       @include mobile{
-        margin-top: vw(50);
+        margin-top: vw2(50);
         margin-left: vw3(-20);
         margin-right: vw3(-20);
       }
       li{
-        font-size: vw(22);
+        font-size: vw2(22);
         line-height: 160%;
         text-transform: uppercase;
         border-top: 1px solid #E2DCC8;
@@ -476,7 +275,7 @@
         }
         > span{
           color: inherit;
-          padding: vw(9) vw2(52) vw(9) vw2(22);
+          padding: vw2(9) vw2(52) vw2(9) vw2(22);
           display: block;
           width: 100%;
           position: relative;
@@ -486,7 +285,7 @@
         }
         > a {
           color: inherit;
-          padding: vw(9) vw2(52) vw(9) vw2(22);
+          padding: vw2(9) vw2(52) vw2(9) vw2(22);
           display: block;
           width: 100%;
           position: relative;
@@ -499,7 +298,7 @@
               top: 50%;
               transform: translateY(-50%);
               width: vw2(19);
-              height: vw(19);
+              height: vw2(19);
               background: url(../img/arrow-link.svg) center center no-repeat;
               background-size: contain;
               pointer-events: none;
@@ -525,7 +324,7 @@
               top: 50%;
               transform: translateY(-50%);
               width: vw2(19);
-              height: vw(19);
+              height: vw2(19);
               background: url(../img/arrow-link.svg) center center no-repeat;
               background-size: contain;
               pointer-events: none;
@@ -542,7 +341,7 @@
     }
     &__subtitle{
       font-weight: 500;
-      font-size: vw(40);
+      font-size: vw2(40);
       line-height: 120%;
       max-width: vw2(514);
       position: relative;
@@ -571,10 +370,10 @@
       }
     }
     &__award{
-      min-height: vw(170);
+      min-height: vw2(170);
       display: flex;
       align-items: center;
-      padding: vw(22) vw2(74);
+      padding: vw2(22) vw2(74);
       overflow: hidden;
       position: relative;
       @include mobile{
@@ -587,7 +386,7 @@
       }
       &-img{
         width: vw2(85);
-        height: vw(85);
+        height: vw2(85);
         display: flex;
         align-items: center;
         flex-basis: vw2(85);
@@ -629,7 +428,9 @@
         width: vw2(390);
         @include mobile{
           width: 100%;
-          margin-top: vw(15);
+          box-sizing: border-box;
+          margin-top: vw3(15);
+          padding-left: vw3(83);
         }
       }
     }
@@ -663,7 +464,7 @@
         }
       }
       &-text{
-        margin-top: vw(24);
+        margin-top: vw2(24);
         @include mobile{
           margin-top: vw3(20);
         }
@@ -678,13 +479,13 @@
       position: relative;
       @include mobile{
         width: 100%;
-        margin-top: vw(60);
+        margin-top: vw2(60);
       }
       &-placeholder{
         height: 100%;
         width: 100%;
-        font-size: vw(18);
-        line-height: vw(50);
+        font-size: vw2(18);
+        line-height: vw2(50);
         opacity: 0.5;
         text-transform: uppercase;
         pointer-events: none;
@@ -700,7 +501,7 @@
         }
       }
       &-input{
-        height: vw(50);
+        height: vw2(50);
         box-sizing: border-box;
         position: relative;
         display: block;
@@ -709,7 +510,7 @@
           height: vw3(50);
         }
         +.content__form-input{
-          margin-top: vw(56);
+          margin-top: vw2(56);
           @include mobile{
             margin-top: vw3(20);
           }
@@ -725,8 +526,8 @@
           color: inherit;
           border: none;
           border-bottom: 1px solid #E2DCC8;
-          font-size: vw(18);
-          line-height: vw(35);
+          font-size: vw2(18);
+          line-height: vw2(35);
           @include mobile{
             font-size: vw3(18);
             line-height: vw3(35);
@@ -735,9 +536,9 @@
           &:focus{
             outline: none;
             +.content__form-placeholder{
-              font-size: vw(13);
-              line-height: vw(13);
-              top: vw(-6);
+              font-size: vw2(13);
+              line-height: vw2(13);
+              top: vw2(-6);
               @include mobile{
                 font-size: vw3(13);
                 line-height: vw3(13);
@@ -748,7 +549,7 @@
         }
       }
       &-btn{
-        margin-top: vw(78);
+        margin-top: vw2(78);
         @include mobile{
           margin-top: vw3(30);
         }
@@ -760,7 +561,7 @@
       padding-left: vw2(200);
       position: relative;
       box-sizing: border-box;
-      margin-top: vw(224);
+      margin-top: vw2(224);
       @include mobile{
         margin-left: 0;
         padding-left: vw3(50);
@@ -770,7 +571,7 @@
         content: "";
         display: block;
         width: vw2(101);
-        height: vw(87);
+        height: vw2(87);
         position: absolute;
         left: 0;
         top: 0;
@@ -784,7 +585,7 @@
       }
 
       &-name{
-        margin-top: vw(49);
+        margin-top: vw2(49);
         font-size: vw2(22);
         line-height: 1.59;
         text-transform: uppercase;
@@ -794,7 +595,7 @@
         }
       }
       &-staff{
-        margin-top: vw(8);
+        margin-top: vw2(8);
         @include mobile{
           margin-top: vw3(8);
         }
@@ -802,7 +603,6 @@
     }
   }
 }
-
 
 .slides{
   position: relative;
@@ -816,8 +616,7 @@
     position: relative;
     overflow: hidden;
     display: flex;
-    flex: 1;
-    height: vw(340);
+    height: vw2(340);
     @include mobile{
       height: vw3(250);
     }
@@ -831,7 +630,7 @@
 
   &__controls {
     display: flex;
-    margin-top: vw(30);
+    margin-top: vw2(30);
     @include mobile{
       margin-top: vw3(20);
     }
@@ -858,8 +657,6 @@
 
 
 }
-
-
 
 .home{
   &__circles{
@@ -897,8 +694,8 @@
   }
 
   &__circle{
-    width: vw(608);
-    height: vw(609);
+    width: vw2(608);
+    height: vw2(609);
     border-radius: 50%;
     overflow: hidden;
     display: flex;
@@ -919,7 +716,7 @@
       object-fit: cover;
     }
     &-text{
-      font-size: vw(22);
+      font-size: vw2(22);
       line-height: 130%;
       @include mobile{
         font-size: vw3(18);
@@ -960,7 +757,7 @@
     justify-content: space-between;
     @include mobile{
       flex-wrap: wrap;
-      margin-top: vw(30);
+      margin-top: vw2(30);
     }
   }
   &__number{
@@ -986,13 +783,12 @@
   }
 }
 
-
-
 .projects{
   &__menu{}
   &__blocks{
     height: 100%;
     overflow: hidden;
+    position: relative;
     @include mobile{
       display: none;
     }
@@ -1002,11 +798,22 @@
     overflow: visible;
     display: none;
     +.projects__block{
-      padding-top: vw(50);
+      padding-top: vw2(50);
     }
     img{
       width: 100%;
       display: block;
+      transition: transform 0.3s;
+    }
+    a{
+      display: block;
+      width: 100%;
+      overflow: hidden;
+      img{
+        &:hover{
+          transform: scale(1.1);
+        }
+      }
     }
     &.active{
       display: block;
@@ -1014,10 +821,7 @@
   }
 }
 
-.awards{
-
-}
-
+.awards{}
 
 .testimonials{
   &__clients{
@@ -1033,10 +837,10 @@
   &__client{
     width: 50%;
     box-sizing: border-box;
-    height: vw(120);
+    height: vw2(120);
     display: flex;
     align-items: center;
-    margin: vw(5) 0;
+    margin: vw2(5) 0;
     padding: 0 vw2(5);
     position: relative;
     @include mobile{
@@ -1051,8 +855,6 @@
     }
   }
 }
-
-
 
 .news{
   &__menu{}
@@ -1069,16 +871,27 @@
     overflow: visible;
     display: none;
     +.news__block {
-      padding-top: vw(100);
+      padding-top: vw2(100);
     }
     img{
       width: 100%;
       display: block;
+      transition: transform 0.3s;
+    }
+    a{
+      display: block;
+      width: 100%;
+      overflow: hidden;
+      img{
+        &:hover{
+          transform: scale(1.1);
+        }
+      }
     }
     &-info{
       display: flex;
       justify-content: space-between;
-      margin-bottom: vw(55);
+      margin-bottom: vw2(55);
     }
     &-date{
       width: vw2(380);
@@ -1100,7 +913,6 @@
   }
 }
 
-
 .contacts{
   &__copyright{
     margin-top: auto;
@@ -1110,6 +922,6 @@
     }
   }
   &__form{
-    margin-top: vw(80);
+    margin-top: vw2(80);
   }
 }

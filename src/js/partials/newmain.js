@@ -6,9 +6,7 @@ var hSpeed = 100,       // Horizontal scrolling speed in percent. More = slower
     noiseMode = 1;       //Background noise. 1 = on / 0 - off
 
 
-
-
-
+//blog page fixed header
 if($('.main').hasClass('blog_page')){
     var header = $('.header');
 	var classes = 'active';
@@ -41,6 +39,7 @@ window.onbeforeunload = function () {
 }
 
 $(function() {
+
     var l = 82,
         fragment = document.createDocumentFragment(),
         div = document.createElement('div');
@@ -51,6 +50,7 @@ $(function() {
 
     $('.home__circles-lines').append(fragment);
 
+    // Create Noise
     const noise = () => {
         let canvas, ctx;
         let canvas2, ctx2;
@@ -59,7 +59,7 @@ $(function() {
         let frame = 0;
         let loopTimeout;
 
-        // Create Noise
+
         const createNoise = () => {
             const idata = ctx.createImageData(wWidth, wHeight);
             const buffer32 = new Uint32Array(idata.data.buffer);
@@ -72,7 +72,6 @@ $(function() {
             noiseData.push(idata);
         };
 
-        // Play Noise
         const paintNoise = () => {
             if (frame === 9) {
                 frame = 0;
@@ -83,7 +82,6 @@ $(function() {
             ctx2.putImageData(noiseData[frame], 0, 0);
         };
 
-        // Loop
         const loop = () => {
             paintNoise(frame);
 
@@ -92,7 +90,6 @@ $(function() {
             }, (1000 / 25));
         };
 
-        // Setup
         const setup = () => {
             wWidth = window.innerWidth;
             wHeight = window.innerHeight;
@@ -106,7 +103,6 @@ $(function() {
             loop();
         };
 
-        // Reset
         let resizeThrottle;
         const reset = () => {
             window.addEventListener('resize', () => {
@@ -118,7 +114,6 @@ $(function() {
             }, false);
         };
 
-        // Init
         const init = (() => {
             canvas = document.getElementById('noise');
             ctx = canvas.getContext('2d');
@@ -138,6 +133,7 @@ $(window).on('load',function (){
     $('#preloader').fadeOut(1500);
     if ($('.home-page').length > 0) {
         if ($(window).width() > 768 && window.orientation !== 0) {
+            //desktop gsap
             gsap.registerPlugin(ScrollTrigger);
             gsap.registerPlugin(ScrollToPlugin);
 
@@ -145,28 +141,68 @@ $(window).on('load',function (){
                 gsap.to('.main--home', {duration: 0.5,autoAlpha: 1},0);
             });
 
-            let currentSlide = 0;
-            let skipMode = false;
 
             let titles = gsap.utils.toArray(".page-title li"),
                 sections = gsap.utils.toArray(".scrollable"),
                 projectBlocks = gsap.utils.toArray(".projects__blocks .projects__block"),
                 newsBlocks = gsap.utils.toArray(".news__blocks .news__block");
+
+            let projectHeights = [];
+            let projectHeightsScroll = [];
+            let projectHeightsTotal = 0;
+            let tempHeight = 0;
+            projectBlocks.forEach((block, index) => {
+                let height = $(block).outerHeight(),
+                    padding = parseInt($(block).css('padding-top'));
+                if (index > 0) {
+                    projectHeights[index] = tempHeight - $('.projects__blocks').innerHeight() / 2;
+                    projectHeightsScroll[index] = tempHeight + padding;
+                } else {
+                    projectHeights[index] = 0;
+                    projectHeightsScroll[index] = 0;
+                }
+                tempHeight += height;
+            });
+            projectHeightsTotal = tempHeight;
+
+            let newsHeights = [];
+            let newsHeightsScroll = [];
+            let newsHeightsTotal = 0;
+            tempHeight = 0;
+            newsBlocks.forEach((block, index) => {
+                let height = $(block).outerHeight(),
+                    padding = parseInt($(block).css('padding-top'));
+                if (index > 0) {
+                    newsHeights[index] = tempHeight - $('.news__blocks').innerHeight() / 2;
+                    newsHeightsScroll[index] = tempHeight + padding;
+                } else {
+                    newsHeights[index] = 0;
+                    newsHeightsScroll[index] = 0;
+                }
+                tempHeight += height;
+            });
+            newsHeightsTotal = tempHeight;
+
+            let currentSlide = 0;
+            let skipMode = false;
+
             let scrollDurationHome = 1000*(parseInt(hSpeed)/100),
                 addBlocksScroll = 200,
-                projectBlocksScroll = projectBlocks.length * 500*(parseInt(vSpeed)/100),
-                newsBlocksScroll = newsBlocks.length * 500*(parseInt(vSpeed)/100);
+                projectBlocksScroll = (projectHeightsTotal - $('.projects__blocks').innerHeight()) < 0 ? 0 : (projectHeightsTotal - $('.projects__blocks').innerHeight()) * (parseInt(vSpeed)/100),
+                newsBlocksScroll = (newsHeightsTotal - $('.news__blocks').innerHeight()) < 0 ? 0 : (newsHeightsTotal - $('.news__blocks').innerHeight()) * (parseInt(vSpeed)/100);
+
+
+
 
             let linkData = {
                 '0': 0,
                 '1': scrollDurationHome,
-                '2': scrollDurationHome * 2 + projectBlocksScroll + addBlocksScroll,
-                '3': scrollDurationHome * 3 + projectBlocksScroll + addBlocksScroll,
-                '4': scrollDurationHome * 4 + projectBlocksScroll + addBlocksScroll,
-                '5': scrollDurationHome * 5 + projectBlocksScroll + addBlocksScroll,
-                '6': scrollDurationHome * 6 + projectBlocksScroll + newsBlocksScroll + addBlocksScroll*2,
+                '2': scrollDurationHome * 2 + projectBlocksScroll + addBlocksScroll*2,
+                '3': scrollDurationHome * 3 + projectBlocksScroll + addBlocksScroll*2,
+                '4': scrollDurationHome * 4 + projectBlocksScroll + addBlocksScroll*2,
+                '5': scrollDurationHome * 5 + projectBlocksScroll + addBlocksScroll*2,
+                '6': scrollDurationHome * 6 + projectBlocksScroll + newsBlocksScroll + addBlocksScroll*4,
             }
-
 
             let tl = gsap.timeline();
 
@@ -175,7 +211,7 @@ $(window).on('load',function (){
                 pin: true,
                 scrub: true,
                 start: "top top",
-                end: "+=" + (scrollDurationHome * (sections.length - 1) + projectBlocksScroll + newsBlocksScroll + addBlocksScroll*2),
+                end: "+=" + (scrollDurationHome * (sections.length - 1) + projectBlocksScroll + newsBlocksScroll + addBlocksScroll*4),
                 onUpdate: ({progress, direction, isActive}) => {
                     let currentScroll = $('html').scrollTop();
                     Object.keys(linkData).forEach(key => {
@@ -287,7 +323,6 @@ $(window).on('load',function (){
 
 
             //projects
-
             let titlesProjects = gsap.utils.toArray(".projects .content__title > *");
             titlesProjects.forEach((title, index) => {
                 if (index % 2 === 0) {
@@ -301,17 +336,7 @@ $(window).on('load',function (){
             menuProjects.forEach((title, index) => {
                 tl1.from(title, {autoAlpha: 0, right: -700 - 150 * index, ease: Power1.easeOut}, 0);
             });
-            let projectHeights = [];
-            let tempHeight = 0;
-            projectBlocks.forEach((block, index) => {
-                let height = $(block).outerHeight();
-                if (index > 0) {
-                    projectHeights[index] = tempHeight - $('.projects__blocks').innerHeight() / 2;
-                } else {
-                    projectHeights[index] = 0;
-                }
-                tempHeight += height;
-            });
+
 
             let tl11 = gsap.timeline();
             let st11 = ScrollTrigger.create({
@@ -319,7 +344,7 @@ $(window).on('load',function (){
                 scrub:parseInt(scrubPower)/100,
                 start: "0 -" + (scrollDurationHome + addBlocksScroll),
                 end: "+=" + projectBlocksScroll,
-                animation: tl11
+                animation: tl11,
             });
             let projectsBlockHeight = 0;
             $('.projects__block').each(function () {
@@ -336,9 +361,9 @@ $(window).on('load',function (){
                     });
                     $('.projects__menu li').removeClass('active');
                     $('.projects__menu li').eq(maxIndex).addClass('active');
-                }
+                },
+                ease: "none"
             }, 0);
-
             //home+projects end
 
 
@@ -357,12 +382,11 @@ $(window).on('load',function (){
             tlTitle3.fromTo(titles[sectionNumber], {y: "100%"},{y: "0", duration: 0.2,});
             tlTitle3.fromTo(titles[sectionNumber - 1], {y: "0"}, {y: "-100%", duration: 0.2,}, 0);
 
-
             let tl3 = gsap.timeline();
             let st3 = ScrollTrigger.create({
                 trigger: "body",
                 scrub:parseInt(scrubPower)/100,
-                start: "0 -" + (scrollDurationHome + projectBlocksScroll + addBlocksScroll),
+                start: "0 -" + (scrollDurationHome + projectBlocksScroll + addBlocksScroll*2),
                 end: "+=" + (scrollDurationHome),
                 onUpdate: ({progress, direction, isActive}) => {
                     if (progress >= 0.9) {
@@ -398,7 +422,7 @@ $(window).on('load',function (){
             let st31 = ScrollTrigger.create({
                 trigger: "body",
                 scrub:parseInt(scrubPower)/100,
-                start: "0 -" + (scrollDurationHome + projectBlocksScroll + scrollDurationHome / 2 + addBlocksScroll),
+                start: "0 -" + (scrollDurationHome + projectBlocksScroll + scrollDurationHome / 2 + addBlocksScroll*2),
                 end: "+=" + (scrollDurationHome / 2),
                 animation: tl31
             });
@@ -407,7 +431,6 @@ $(window).on('load',function (){
             awardsAwards.forEach((award, index) => {
                 tl31.from(award, {autoAlpha: 0, bottom: -800 - 300 * index, ease: Power1.easeOut}, 0);
             });
-
             //awards end
 
             //testimonials start
@@ -420,7 +443,7 @@ $(window).on('load',function (){
             let st4 = ScrollTrigger.create({
                 trigger: "body",
                 scrub:parseInt(scrubPower)/100,
-                start: "0 -" + (scrollDurationHome * (sectionNumber - 1) + projectBlocksScroll + addBlocksScroll),
+                start: "0 -" + (scrollDurationHome * (sectionNumber - 1) + projectBlocksScroll + addBlocksScroll*2),
                 end: "+=" + (scrollDurationHome),
                 onToggle: ({progress, direction, isActive}) => {
                     if (!isActive && direction > 0) {
@@ -454,12 +477,11 @@ $(window).on('load',function (){
             let st41 = ScrollTrigger.create({
                 trigger: "body",
                 scrub:parseInt(scrubPower)/100,
-                start: "0 -" + (scrollDurationHome * (sectionNumber - 1) + projectBlocksScroll + scrollDurationHome / 2 + addBlocksScroll),
+                start: "0 -" + (scrollDurationHome * (sectionNumber - 1) + projectBlocksScroll + scrollDurationHome / 2 + addBlocksScroll*2),
                 end: "+=" + (scrollDurationHome / 2),
                 animation: tl41
             });
             tl41.from('.testimonials .content__subtitle', {autoAlpha: 0, top: -200, ease: Power1.easeOut}, 0);
-
             //testimonials end
 
 
@@ -483,7 +505,7 @@ $(window).on('load',function (){
             let st5 = ScrollTrigger.create({
                 trigger: "body",
                 scrub:parseInt(scrubPower)/100,
-                start: "0 -" + (scrollDurationHome * (sectionNumber - 1) + projectBlocksScroll + addBlocksScroll),
+                start: "0 -" + (scrollDurationHome * (sectionNumber - 1) + projectBlocksScroll + addBlocksScroll*2),
                 end: "+=" + (scrollDurationHome),
                 onUpdate: ({progress, direction, isActive}) => {
                     if (progress >= 0.9) {
@@ -516,12 +538,11 @@ $(window).on('load',function (){
                 }
             });
 
-
             let tl51 = gsap.timeline();
             let st51 = ScrollTrigger.create({
                 trigger: "body",
                 scrub:parseInt(scrubPower)/100,
-                start: "0 -" + (scrollDurationHome * (sectionNumber - 1) + projectBlocksScroll + scrollDurationHome / 2 + addBlocksScroll),
+                start: "0 -" + (scrollDurationHome * (sectionNumber - 1) + projectBlocksScroll + scrollDurationHome / 2 + addBlocksScroll*2),
                 end: "+=" + (scrollDurationHome / 2),
                 animation: tl51
             });
@@ -545,7 +566,7 @@ $(window).on('load',function (){
             let st6 = ScrollTrigger.create({
                 trigger: "body",
                 scrub:parseInt(scrubPower)/100,
-                start: "0 -" + (scrollDurationHome * (sectionNumber - 1) + projectBlocksScroll + addBlocksScroll),
+                start: "0 -" + (scrollDurationHome * (sectionNumber - 1) + projectBlocksScroll + addBlocksScroll*2),
                 end: "+=" + (scrollDurationHome),
                 onUpdate: ({progress, direction, isActive}) => {
                     if (progress >= 0.9) {
@@ -582,22 +603,12 @@ $(window).on('load',function (){
                 tl6.from(title, {autoAlpha: 0, right: -700 - 150 * index, ease: Power1.easeOut}, 0);
             });
 
-            let newsHeights = [];
-            tempHeight = 0;
-            newsBlocks.forEach((block, index) => {
-                let height = $(block).outerHeight();
-                if (index > 0) {
-                    newsHeights[index] = tempHeight - $('.news__blocks').innerHeight() / 2;
-                } else {
-                    newsHeights[index] = 0;
-                }
-                tempHeight += height;
-            });
+
             let tl61 = gsap.timeline();
             let st61 = ScrollTrigger.create({
                 trigger: "body",
                 scrub:parseInt(scrubPower)/100,
-                start: "0 -" + (scrollDurationHome * sectionNumber + projectBlocksScroll + addBlocksScroll*2),
+                start: "0 -" + (scrollDurationHome * sectionNumber + projectBlocksScroll + addBlocksScroll*3),
                 end: "+=" + newsBlocksScroll,
                 animation: tl61
             });
@@ -616,8 +627,8 @@ $(window).on('load',function (){
                     });
                     $('.news__menu li').removeClass('active');
                     $('.news__menu li').eq(maxIndex).addClass('active');
-
-                }
+                },
+                ease: "none"
             }, 0);
             //news end
 
@@ -634,7 +645,7 @@ $(window).on('load',function (){
             let st7 = ScrollTrigger.create({
                 trigger: "body",
                 scrub:parseInt(scrubPower)/100,
-                start: "0 -" + (scrollDurationHome * (sectionNumber - 1) + projectBlocksScroll + newsBlocksScroll + addBlocksScroll*2),
+                start: "0 -" + (scrollDurationHome * (sectionNumber - 1) + projectBlocksScroll + newsBlocksScroll + addBlocksScroll*4),
                 end: "+=" + (scrollDurationHome),
                 onToggle: ({progress, direction, isActive}) => {
                     if (!isActive && direction > 0) {
@@ -670,7 +681,7 @@ $(window).on('load',function (){
             let st71 = ScrollTrigger.create({
                 trigger: "body",
                 scrub:parseInt(scrubPower)/100,
-                start: "0 -" + (scrollDurationHome * (sectionNumber - 1) + projectBlocksScroll + newsBlocksScroll + scrollDurationHome / 2 + addBlocksScroll*2),
+                start: "0 -" + (scrollDurationHome * (sectionNumber - 1) + projectBlocksScroll + newsBlocksScroll + scrollDurationHome / 2 + addBlocksScroll*4),
                 end: "+=" + (scrollDurationHome / 2),
                 animation: tl71
             });
@@ -684,7 +695,7 @@ $(window).on('load',function (){
             let stScroll = ScrollTrigger.create({
                 trigger: "body",
                 scrub:parseInt(scrubPower)/100,
-                start: "0 -" + (scrollDurationHome + projectBlocksScroll + addBlocksScroll),
+                start: "0 -" + (scrollDurationHome + projectBlocksScroll + addBlocksScroll*2),
                 end: "+=" + (scrollDurationHome * (sections.length - 3)),
                 snap: 0.25*parseInt(snapMode),
                 onUpdate: function () {
@@ -703,7 +714,7 @@ $(window).on('load',function (){
             let stScrollLast = ScrollTrigger.create({
                 trigger: "body",
                 scrub:parseInt(scrubPower)/100,
-                start: "0 -" + (scrollDurationHome * (sections.length - 2) + projectBlocksScroll + newsBlocksScroll + addBlocksScroll*2),
+                start: "0 -" + (scrollDurationHome * (sections.length - 2) + projectBlocksScroll + newsBlocksScroll + addBlocksScroll*4),
                 end: "+=" + (scrollDurationHome),
                 snap: parseInt(snapMode),
                 onUpdate: function () {
@@ -726,6 +737,7 @@ $(window).on('load',function (){
 
             gsap.set(sections, {xPercent: 0});
 
+            //menu navigation
             $(document).on('click', '.js-scroll-link', function () {
                 event.preventDefault();
                 if (!blockNavigation && !skipMode){
@@ -735,11 +747,7 @@ $(window).on('load',function (){
                     let link = $(this).data('link'),
                         currentScroll = $('html').scrollTop();
                     setTimeout(function (){
-
-
-
                         st.scroll(parseInt(linkData[link]));
-
                         switch (link) {
                             case 0:
                                 tlScrollLast.progress(0);
@@ -915,6 +923,23 @@ $(window).on('load',function (){
                     },500);
                 }
             });
+
+
+
+            $(document).on('click', '.projects__menu a', function () {
+                event.preventDefault();
+                let parent = $(this).parent(),
+                    progress = projectHeightsScroll[parent.index()] / (projectHeightsTotal - $('.projects__blocks').innerHeight()),
+                    scrollTo = parseInt(linkData[1]) + addBlocksScroll*2 + projectBlocksScroll*progress;
+                st.scroll(scrollTo);
+            });
+            $(document).on('click', '.news__menu a', function () {
+                event.preventDefault();
+                let parent = $(this).parent(),
+                    progress = newsHeightsScroll[parent.index()] / (newsHeightsTotal - $('.news__blocks').innerHeight()),
+                    scrollTo = parseInt(linkData[5]) + addBlocksScroll + newsBlocksScroll*progress;
+                st.scroll(scrollTo);
+            });
         } else {
             //mobile
             $(document).on('click', '.js-scroll-link', function () {
@@ -929,6 +954,7 @@ $(window).on('load',function (){
     }
 });
 
+//reviews slider
 $(function (){
     if ($('.home-page').length > 0){
         var slideDuration = 0.3;
