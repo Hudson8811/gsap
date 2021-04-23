@@ -852,14 +852,14 @@ body::-webkit-scrollbar-thumb {
           display: block;
           height: auto; } }
     .home-page .content__award {
-      min-height: 8.85417vw;
+      min-height: 16.19048vh;
       display: -webkit-box;
       display: -ms-flexbox;
       display: flex;
       -webkit-box-align: center;
           -ms-flex-align: center;
               align-items: center;
-      padding: 1.14583vw 3.85417vw;
+      padding: 2.09524vh 3.85417vw;
       overflow: hidden;
       position: relative; }
       @media screen and (max-width: 768px) and (orientation: portrait) {
@@ -1043,7 +1043,7 @@ body::-webkit-scrollbar-thumb {
       position: relative;
       -webkit-box-sizing: border-box;
               box-sizing: border-box;
-      margin-top: 11.66667vw; }
+      margin-top: 21.33333vh; }
       @media screen and (max-width: 768px) and (orientation: portrait) {
         .home-page .content__slider {
           margin-left: 0;
@@ -1065,7 +1065,7 @@ body::-webkit-scrollbar-thumb {
             width: 12vw;
             height: 8vw; } }
       .home-page .content__slider-name {
-        margin-top: 2.55208vw;
+        margin-top: 4.66667vh;
         font-size: 1.14583vw;
         line-height: 1.59;
         text-transform: uppercase; }
@@ -1098,7 +1098,7 @@ body::-webkit-scrollbar-thumb {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
-    height: 17.70833vw; }
+    height: 32.38095vh; }
     @media screen and (max-width: 768px) and (orientation: portrait) {
       .slides__container {
         height: 66.66667vw; } }
@@ -1311,7 +1311,7 @@ body::-webkit-scrollbar-thumb {
   width: 50%;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
-  height: 6.25vw;
+  height: 11.42857vh;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -1387,6 +1387,9 @@ body::-webkit-scrollbar-thumb {
       margin-top: 8vw; } }
 
 .contacts__form {
-  margin-top: 4.16667vw; }
+  margin-top: 7.61905vh; }
+  @media screen and (max-width: 768px) and (orientation: portrait) {
+    .contacts__form {
+      margin-top: 13.33333vw; } }
 
 /*# sourceMappingURL=maps/main.css.map */

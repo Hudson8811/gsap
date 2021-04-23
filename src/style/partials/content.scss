@@ -370,10 +370,10 @@
       }
     }
     &__award{
-      min-height: vw2(170);
+      min-height: vw(170);
       display: flex;
       align-items: center;
-      padding: vw2(22) vw2(74);
+      padding: vw(22) vw2(74);
       overflow: hidden;
       position: relative;
       @include mobile{
@@ -561,7 +561,7 @@
       padding-left: vw2(200);
       position: relative;
       box-sizing: border-box;
-      margin-top: vw2(224);
+      margin-top: vw(224);
       @include mobile{
         margin-left: 0;
         padding-left: vw3(50);
@@ -585,7 +585,7 @@
       }
 
       &-name{
-        margin-top: vw2(49);
+        margin-top: vw(49);
         font-size: vw2(22);
         line-height: 1.59;
         text-transform: uppercase;
@@ -616,7 +616,7 @@
     position: relative;
     overflow: hidden;
     display: flex;
-    height: vw2(340);
+    height: vw(340);
     @include mobile{
       height: vw3(250);
     }
@@ -837,7 +837,7 @@
   &__client{
     width: 50%;
     box-sizing: border-box;
-    height: vw2(120);
+    height: vw(120);
     display: flex;
     align-items: center;
     margin: vw2(5) 0;
@@ -922,6 +922,9 @@
     }
   }
   &__form{
-    margin-top: vw2(80);
+    margin-top: vw(80);
+    @include mobile{
+      margin-top: vw3(50);
+    }
   }
 }

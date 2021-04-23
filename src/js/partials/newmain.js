@@ -1,4 +1,4 @@
-//Animation settings
+/* 2.1 Animation settings */
 var hSpeed = 100,       // Horizontal scrolling speed in percent. More = slower
     vSpeed = 100,       // Scrolling speed of vertical blocks (news, projects) as a percentage. More = slower
     scrubPower = 100,   // Time / strength of action of smooth stop after scrolling. 100 = 1 second. More = longer
@@ -6,7 +6,7 @@ var hSpeed = 100,       // Horizontal scrolling speed in percent. More = slower
     noiseMode = 1;       //Background noise. 1 = on / 0 - off
 
 
-//blog page fixed header
+/* 2.2 Blog page fixed header */
 if($('.main').hasClass('blog_page')){
     var header = $('.header');
 	var classes = 'active';
@@ -34,23 +34,8 @@ if($('.main').hasClass('blog_page')){
 }
 
 
-window.onbeforeunload = function () {
-    window.scrollTo(0, 0);
-}
-
+/* 2.3 Noise animation */
 $(function() {
-
-    var l = 82,
-        fragment = document.createDocumentFragment(),
-        div = document.createElement('div');
-
-    while (l--) {
-        fragment.appendChild(div.cloneNode(true));
-    }
-
-    $('.home__circles-lines').append(fragment);
-
-    // Create Noise
     const noise = () => {
         let canvas, ctx;
         let canvas2, ctx2;
@@ -129,11 +114,27 @@ $(function() {
 });
 
 
+window.onbeforeunload = function () {
+    window.scrollTo(0, 0);
+}
+$(function() {
+    if ($('.home__circles-lines').length > 0) {
+        var l = 82,
+            fragment = document.createDocumentFragment(),
+            div = document.createElement('div');
+
+        while (l--) {
+            fragment.appendChild(div.cloneNode(true));
+        }
+        $('.home__circles-lines').append(fragment);
+    }
+});
+
+/* 2.4 Home scroll animation */
 $(window).on('load',function (){
     $('#preloader').fadeOut(1500);
     if ($('.home-page').length > 0) {
         if ($(window).width() > 768 && window.orientation !== 0) {
-            //desktop gsap
             gsap.registerPlugin(ScrollTrigger);
             gsap.registerPlugin(ScrollToPlugin);
 
@@ -190,9 +191,6 @@ $(window).on('load',function (){
                 addBlocksScroll = 200,
                 projectBlocksScroll = (projectHeightsTotal - $('.projects__blocks').innerHeight()) < 0 ? 0 : (projectHeightsTotal - $('.projects__blocks').innerHeight()) * (parseInt(vSpeed)/100),
                 newsBlocksScroll = (newsHeightsTotal - $('.news__blocks').innerHeight()) < 0 ? 0 : (newsHeightsTotal - $('.news__blocks').innerHeight()) * (parseInt(vSpeed)/100);
-
-
-
 
             let linkData = {
                 '0': 0,
@@ -924,8 +922,6 @@ $(window).on('load',function (){
                 }
             });
 
-
-
             $(document).on('click', '.projects__menu a', function () {
                 event.preventDefault();
                 let parent = $(this).parent(),
@@ -941,20 +937,18 @@ $(window).on('load',function (){
                 st.scroll(scrollTo);
             });
         } else {
-            //mobile
             $(document).on('click', '.js-scroll-link', function () {
                 event.preventDefault();
                 let href = $(this).attr('href'),
                     topPos = $(href).offset(),
                     header = $('.header').height();
                 $("html, body").animate({scrollTop: topPos.top - header}, 500);
-
             });
         }
     }
 });
 
-//reviews slider
+/* 2.5 Reviews slider */
 $(function (){
     if ($('.home-page').length > 0){
         var slideDuration = 0.3;
