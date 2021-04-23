@@ -117,8 +117,7 @@ block main
 									img.home__circle-img(src="img/image-1.jpg" alt="")
 								.home__circle.home__circle--right
 									.home__circle-text
-										label.input-file
-											input(type="file" name="file")
+										label.input-file(for="brief")
 											span Fill out the <br>brief to find out <br>the cost
 
 
@@ -443,16 +442,16 @@ block main
 
 						.content__right
 							.content__subtitle Let's grab a coffee and jump on <span>conversation</span> chat with me.
-							.content__contacts.contacts__form
+							form.content__contacts.contacts__form
 								.content__brief
 									.content__brief-title
 										label.input-file
-											input(type="file" name="file")
+											input(type="file" name="file" id="brief")
 											span send a brief
 
-									.content__brief-text.small I recommend filling out a brief to assess the cost of the project. <a href="">Brief</a>
+									.content__brief-text.small I recommend filling out a brief to assess the cost of the project. <label for="brief">Brief</label>
 
-								form.content__form
+								.content__form
 									label.content__form-input
 										input(type="text" name="name")
 										span.content__form-placeholder name

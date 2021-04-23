@@ -957,7 +957,7 @@ body::-webkit-scrollbar-thumb {
         @media screen and (max-width: 768px) and (orientation: portrait) {
           .home-page .content__brief-text {
             margin-top: 5.33333vw; } }
-        .home-page .content__brief-text span, .home-page .content__brief-text a {
+        .home-page .content__brief-text label, .home-page .content__brief-text span, .home-page .content__brief-text a {
           color: #B66449; }
     .home-page .content__form {
       width: 25.78125vw;

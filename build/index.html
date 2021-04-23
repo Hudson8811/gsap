@@ -176,9 +176,7 @@
                     <div class="home__circle home__circle--left"><img class="home__circle-img" src="img/image-1.jpg" alt=""></div>
                     <div class="home__circle home__circle--right">
                       <div class="home__circle-text">
-                        <label class="input-file">
-                          <input type="file" name="file"><span>Fill out the <br>brief to find out <br>the cost</span>
-                        </label>
+                        <label class="input-file" for="brief"><span>Fill out the <br>brief to find out <br>the cost</span></label>
                       </div>
                     </div>
                   </div>
@@ -528,16 +526,16 @@
                 </div>
                 <div class="content__right">
                   <div class="content__subtitle">Let's grab a coffee and jump on <span>conversation</span> chat with me.</div>
-                  <div class="content__contacts contacts__form">
+                  <form class="content__contacts contacts__form">
                     <div class="content__brief">
                       <div class="content__brief-title">
                         <label class="input-file">
-                          <input type="file" name="file"><span>send a brief</span>
+                          <input type="file" name="file" id="brief"><span>send a brief</span>
                         </label>
                       </div>
-                      <div class="content__brief-text small">I recommend filling out a brief to assess the cost of the project. <a href="">Brief</a></div>
+                      <div class="content__brief-text small">I recommend filling out a brief to assess the cost of the project. <label for="brief">Brief</label></div>
                     </div>
-                    <form class="content__form">
+                    <div class="content__form">
                       <label class="content__form-input">
                         <input type="text" name="name"><span class="content__form-placeholder">name</span>
                       </label>
@@ -554,8 +552,8 @@
                           </svg>
                         </button>
                       </div>
-                    </form>
-                  </div>
+                    </div>
+                  </form>
                 </div>
               </div>
             </section>

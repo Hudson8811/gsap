@@ -112,7 +112,7 @@ gulp.task('blogStyle:build', function () {
 		.pipe(autoprefixer({
 			browsers: ['last 2 versions']
 		}))
-		.pipe(cleanCSS({rebase: false}))
+		//.pipe(cleanCSS({rebase: false}))
 		.pipe(sourcemaps.write('./maps'))
 		.pipe(gulp.dest(path.build.css))
 		.pipe(reload({stream: true}));
