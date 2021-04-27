@@ -6,6 +6,7 @@
 		2.3 Noise animation
 		2.4 Home scroll animation
 		2.5 Reviews slider
+		2.6 Form
 -------------------------------------------------*/
 
 /*-------------------------------------------------------------------------------
@@ -1090,5 +1091,54 @@ $(function (){
             $(this).removeClass('valid');
         }
     });
+});
+
+
+/* 2.6 Form */
+$(function (){
+    $(document).on('submit','.js-contact-form',function (){
+        event.preventDefault();
+        let form = $(this),
+            valid = true;
+        form.find('input[required]').each(function (){
+            let name = $(this).attr('type'),
+                value = $(this).val();
+            switch (name) {
+                case 'text':
+                    let minlength = parseInt($(this).attr('minlength'));
+                    if (minlength > 0 && value.length < minlength) valid = false;
+                    console.log(minlength);
+                    console.log(value.length);
+                    break;
+                case 'email':
+                    if (!validateEmail(value)) valid = false;
+                    break;
+                default:
+                    break;
+            }
+        });
+        if (valid){
+            let url = '/php/mail.php'
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: form.serialize(),
+                success: function(data){
+                    alert(data);
+                },
+                error: function (data){
+                    alert(data);
+                }
+            });
+        } else {
+            alert('Enter the data in the required fields');
+        }
+
+    });
+
+    function validateEmail(email) {
+        const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return re.test(String(email).toLowerCase());
+    }
 });
 //# sourceMappingURL=maps/main.js.map

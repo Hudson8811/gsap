@@ -526,7 +526,7 @@
                 </div>
                 <div class="content__right">
                   <div class="content__subtitle">Let's grab a coffee and jump on <span>conversation</span> chat with me.</div>
-                  <form class="content__contacts contacts__form">
+                  <form class="content__contacts contacts__form js-contact-form" method="post">
                     <div class="content__brief">
                       <div class="content__brief-title">
                         <label class="input-file">
@@ -543,7 +543,7 @@
                         <input type="email" name="emal" required=""><span class="content__form-placeholder">EMAIL *</span>
                       </label>
                       <label class="content__form-input">
-                        <input type="text" name="msg" required=""><span class="content__form-placeholder">MESSAGE *</span>
+                        <input type="text" name="msg" required="" minlength="10"><span class="content__form-placeholder">MESSAGE *</span>
                       </label>
                       <div class="content__form-btn">
                         <button class="btn btn--arrow" type="submit">

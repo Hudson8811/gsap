@@ -442,7 +442,7 @@ block main
 
 						.content__right
 							.content__subtitle Let's grab a coffee and jump on <span>conversation</span> chat with me.
-							form.content__contacts.contacts__form
+							form.content__contacts.contacts__form.js-contact-form(method="post")
 								.content__brief
 									.content__brief-title
 										label.input-file
@@ -459,7 +459,7 @@ block main
 										input(type="email" name="emal" required="")
 										span.content__form-placeholder EMAIL *
 									label.content__form-input
-										input(type="text" name="msg" required="")
+										input(type="text" name="msg" required="" minlength="10")
 										span.content__form-placeholder MESSAGE *
 									.content__form-btn
 										button.btn.btn--arrow(type="submit")
